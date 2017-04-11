@@ -1,0 +1,248 @@
+/* here you can put your own css to customize and override the theme */
+
+.height-inherit {
+    height: inherit;
+}
+
+.height-100 {
+    height: 100%;
+}
+
+.map-loading {
+    width: 100%;
+    margin: 20% auto;
+}
+
+.align-content {
+    padding-top: 0px !important;
+}
+
+.farm-info {
+    font-size: 14px;
+    padding: 10px 0px;
+}
+
+.farm_name {
+    color:;
+}
+
+.main-panel {
+    background-color: rgba(90, 90, 90, 0.7) !important;
+    color: #FFF;
+}
+
+.main-panel-list {
+    list-style: none;
+    padding: 0px 5%;
+    margin: 30px 0;
+    font-size: 110%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.main-panel-sub-list {
+    list-style: none;
+    padding: 0px 5%;
+    margin: 30px 0;
+    font-size: 110%;
+}
+
+.main-panel-sub-tree-row {
+    font-size:20px;
+    text-decoration: none;
+    color: white;
+}
+
+.main-panel-sub-tree-row:hover {
+    cursor: hand;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.tree-row-info {
+    border: 1px solid rgba(176, 176, 176, 0.37);
+    margin-top: 10px;
+}
+
+ul.timeline-info > li {
+    padding-bottom: 5px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.tree-row-info-data {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+}
+
+.timeline-info {
+    list-style: none;
+    padding: 5%;
+}
+
+.timeline-block-img {
+    background-position: top;
+    background-size: cover;
+    width: 100%;
+    height: 250px;
+}
+
+.timeline-block {
+    border: 1px solid #eee;
+    padding: 0;
+    width: 96%;
+    margin: 2%;
+}
+
+.timeline-title {
+    color: orange;
+    text-align: center;
+}
+
+.timeline-block-data {
+    width: 100%;
+}
+
+.timeline-border {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 85%;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #eee;
+    -webkit-background-color: #eee;
+    -moz-background-color: #eee;
+    -o-background-color: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-background-color: rgba(0, 0, 0, 0.5);
+    -moz-background-color: rgba(0, 0, 0, 0.5);
+    -o-background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sub-panel-map-border {
+    background-color: #eee;
+}
+
+.sub-panel-map-img {
+    padding: 5px;
+}
+
+.map-parent {
+    width: 100%;
+    height: 100%;
+}
+
+.map-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.full-width {
+    width: 100% !important;
+}
+
+.search-farm {
+    width: 90%;
+    height: 34px;
+    margin: 10px 5%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.search-farm[placeholder] {
+    padding-left: 5px;
+}
+
+a.nav-link {
+    padding: 10px !important;
+}
+
+.carousel-control {
+    width: 5% !important;
+}
+
+.carousel-indicators {
+    left: 5%;
+    margin: 0 !important;
+}
+
+.carousel-indicators li {
+    border-radius: 50% !important;
+    float: left;
+}
+
+@-webkit-keyframes slideInRight {
+    from {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.slideInRight-appear {
+    -webkit-animation-name: slideInRight;
+    animation-name: slideInRight;
+}
+
+@-webkit-keyframes slideOutLeft {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+.slideOutLeft-appear {
+    -webkit-animation-name: slideOutLeft;
+    animation-name: slideOutLeft;
+}
