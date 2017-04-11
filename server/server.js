@@ -58,7 +58,7 @@ const renderFullPage = (html, initialState) => {
         ${head.link.toString()}
         ${head.script.toString()}
 
-        ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest[ '/app.css' ]}' />` : ''}
+        ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
        </head>
       <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-sidebar-closed">
       <div id="loading" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #FFF; z-index: 10000;">
@@ -74,14 +74,14 @@ const renderFullPage = (html, initialState) => {
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
         </script>
-        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest[ '/dist/vendor.js' ] : '/dist/vendor.js'}'></script>
+        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/dist/vendor.js'] : '/dist/vendor.js'}'></script>
         <script type="text/javascript">
        document.addEventListener('DOMContentLoaded', function() {
   console.log('here');
     document.getElementById('loading').style.display = 'none';
 });
         </script>
-        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest[ '/dist/app.js' ] : '/dist/app.js'}'></script>
+        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/dist/app.js'] : '/dist/app.js'}'></script>
         <script src="layout/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="layout/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
         <script src="layout/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
