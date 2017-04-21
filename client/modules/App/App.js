@@ -1,25 +1,16 @@
+import { showSidebarSelector, showHeaderSelector } from './AppReducer';
+import { activeHeader, activeSidebar, deActiveHeader, deActiveSidebar } from './AppActions';
+import { fetchUserSelector } from '../Login/LoginReducer';
+import Header from '../../../client/util/common/Header';
+import SideBar from '../../../client/util/common/Sidebar';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { isEmpty } from 'lodash';
-import {
-  showSidebarSelector,
-  showHeaderSelector,
-} from './AppReducer';
-import {
-  activeHeader,
-  activeSidebar,
-  deActiveHeader,
-  deActiveSidebar,
-} from './AppActions';
-import { fetchUserSelector } from '../Login/LoginReducer';
-
 import ReduxToastr from 'react-redux-toastr';
 import links from '../../util/links.json';
 import Helmet from 'react-helmet';
-import Header from '../Admin/components/Header';
-import SideBar from '../Admin/components/Sidebar';
+
 
 const mapStateToProps = (state) => ({
   showSidebar: showSidebarSelector(state),
@@ -85,7 +76,7 @@ class App extends React.Component {
               </div>
               <div className="page-footer">
                 <div className="scroll-to-top">
-                  <i className="icon-arrow-up"></i>
+                  <i className="icon-arrow-up"/>
                 </div>
               </div>
             </div>

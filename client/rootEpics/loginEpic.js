@@ -1,8 +1,14 @@
 import 'rxjs';
 import { combineEpics } from 'redux-observable';
-import { LOGIN_SUCCESS, LOGIN_FAILURE, UPDATE_FARMER_SUCCESS,SET_USER_DATA, SET_FAILURE_MESSAGE } from '../modules/Login/LoginActions';
-import { logIn ,setUserData} from '../modules/Login/LoginActions';
-import { activeHeader , activeSidebar } from '../modules/App/AppActions';
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  UPDATE_FARMER_SUCCESS,
+  SET_USER_DATA,
+  SET_FAILURE_MESSAGE
+} from '../modules/Login/LoginActions';
+import { logIn, setUserData } from '../modules/Login/LoginActions';
+import { activeHeader, activeSidebar } from '../modules/App/AppActions';
 import { browserHistory } from 'react-router';
 import { dispatch } from 'react-redux';
 
@@ -58,7 +64,7 @@ const loginSuccessEpic = actions$ => (
       const userType = user.type_id;
       switch (userType) {
         case 0:
-          browserHistory.push('/admin');
+          browserHistory.push('/settingUser');
           break;
         //case 1:
         //  browserHistory.push('/buyer');

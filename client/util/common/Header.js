@@ -1,15 +1,13 @@
+import { logOut } from '../../modules/Login/LoginActions';
+import { configureStore } from '../../store';
 import React from "react";
 import { Link, browserHistory } from "react-router";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { isEmpty } from "lodash";
-import config from '../../../../configs/config';
-import { logOut } from '../../Login/LoginActions';
 import { persistStore } from 'redux-persist';
-import { configureStore } from '../../../store';
 
 class Header extends React.Component {
-
   logOut() {
     const { logOut } =this.props;
     logOut();
@@ -24,7 +22,7 @@ class Header extends React.Component {
       <div className="page-header navbar navbar-fixed-top">
         <div className="page-header-inner ">
           <div className="page-logo">
-            <Link to="/admin">
+            <Link to="/settingUser">
               <img src="img/header_logo.png" alt="logo" className="logo-default" height="35px"
                    style={{ marginTop: "5px" }}/>
             </Link>
