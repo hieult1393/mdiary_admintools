@@ -1,17 +1,14 @@
-import React from 'react';
-import { browserHistory } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// import setAuthorizationToken from "./setAuthorizationToken.js"
-import config from '../../../configs/config.js';
-const API_URL = config.api_url;
+import { initLogin, checkUserLogin, setUserData, logIn } from '../LoginActions';
+import { fetchUserSelector, isLoginSelector, loginFailSelector } from '../LoginReducer';
+import { showHeaderSelector, showSidebarSelector } from '../../App/AppReducer';
+import { deActiveHeader, deActiveSidebar } from '../../App/AppActions';
+import config from '../../../../configs/config.js';
 import styles from './Login.css';
+import React from 'react';
+import { connect } from 'react-redux';
+const API_URL = config.api_url;
 import { isEmpty } from 'lodash';
 import { compose, withState, lifecycle, withProps, branch, renderComponent } from 'recompose';
-import { initLogin, checkUserLogin, setUserData, logIn } from './LoginActions';
-import { fetchUserSelector, isLoginSelector, loginFailSelector } from './LoginReducer';
-import { showHeaderSelector, showSidebarSelector } from '../App/AppReducer';
-import { deActiveHeader, deActiveSidebar } from '../App/AppActions';
 import { reduxForm, Field } from 'redux-form';
 
 const required = value => value ? undefined : 'Vui lòng không để trống!';
@@ -23,8 +20,8 @@ const required = value => value ? undefined : 'Vui lòng không để trống!';
 const renderInput = ({ input, label, placeholder, type, meta: { touched, error } }) => (
   <div className={`form-group ${touched && error ? 'has-error' : ''}`}>
     <input {...input} type={type}
-                      placeholder={placeholder} autoComplete="off"
-                      className='form-control'/>
+           placeholder={placeholder} autoComplete="off"
+           className='form-control'/>
     <div className="help-block">
       {touched && ((error && <span>{error}</span>))}
     </div>
@@ -57,7 +54,7 @@ const NewLogin = (props) => {
             })}>
               {renderField('username', 'Tên đăng nhập')}
               {renderField('password', 'Mật khẩu')}
-              {(loginFail && loginFail.status === true) ? <h5 style={{color:'red'}}>{loginFail.message}</h5> : null}
+              {(loginFail && loginFail.status === true) ? <h5 style={{ color: 'red' }}>{loginFail.message}</h5> : null}
               <button className="btn green uppercase full-width">Đăng nhập</button>
             </form>
           </div>

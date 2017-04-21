@@ -11,17 +11,6 @@ export class UpdateButton extends React.Component {
   }
 }
 
-export class DetailButton extends React.Component {
-  render() {
-    return (
-      <button className='btn btn-circle btn-icon-only yellow-mint'
-              type='button' onClick={this.props.onClick}>
-        <i className='fa fa-search'/>
-      </button>
-    );
-  }
-}
-
 export class DeleteButton extends React.Component {
   render() {
     return (
@@ -33,33 +22,13 @@ export class DeleteButton extends React.Component {
   }
 }
 
-export class SaveButton extends React.Component {
+export class AccountButton extends React.Component {
   render() {
     return (
-      <button className="btn btn-circle btn-icon-only green" type="button"
-              onClick={this.props.onClick}>
-        <i className='fa fa-check'/>
+      <button className='btn btn-circle btn-icon-only green'
+              type='button' onClick={this.props.onClick}>
+        <i className='fa fa-user'/>
       </button>
-    );
-  }
-}
-
-export class CancelButton extends React.Component {
-  render() {
-    return (
-      <button className="btn btn-circle btn-icon-only yellow-crusta" type="button"
-              onClick={this.props.onClick}>
-        <i className='fa fa-ban'/>
-      </button>
-    );
-  }
-}
-
-export class TableColumn extends React.Component {
-  render() {
-    const { value } = this.props;
-    return (
-      <td>{value}</td>
     );
   }
 }
@@ -72,7 +41,16 @@ export class TableRow extends React.Component {
   }
 }
 
-export default class Table extends React.Component {
+export class TableColumn extends React.Component {
+  render() {
+    const { value } = this.props;
+    return (
+      <td onClick={this.props.onClick}>{value}</td>
+    );
+  }
+}
+
+export class Table extends React.Component {
   render() {
     const { tableHeaderList } = this.props;
     return (
