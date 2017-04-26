@@ -9,17 +9,19 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   activeSidebar,
 }, dispatch);
 
-export class PageContent extends React.Component {
+class PageContent extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  
   componentWillMount() {
     const { activeHeader, activeSidebar } = this.props;
     activeHeader();
     activeSidebar();
+    
   }
-
+  
+  
   render() {
     return (
       <div style={{ width: '100%', display: 'flex' }}>
@@ -41,3 +43,25 @@ export class PageContent extends React.Component {
 }
 
 export default connect(null, mapDispatchToProps)(PageContent);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

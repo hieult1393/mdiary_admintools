@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
 import Login from './modules/Login/containers/Login';
 import UserIndex from './modules/Settings/SettingUsers/containers/UserIndex';
+import ElementIndex from './modules/Settings/SettingElements/containers/ElementIndex';
 import UserCreate from './modules/Settings/SettingUsers/containers/UserCreate';
 import AccountIndex from './modules/Settings/SettingAccounts/containers/AccountIndex';
 
@@ -17,6 +18,7 @@ export default (
     <IndexRoute component={Login}/>
     <Route path="/settingUser" component={UserIndex}/>
     <Route path="/settingUser/userCreate" component={UserCreate}/>
+    <Route path="/settingElement" component={ElementIndex}/>
     <Route path="/settingAccount" component={AccountIndex}/>
   </Route>
 );

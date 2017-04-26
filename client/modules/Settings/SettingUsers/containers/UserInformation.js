@@ -1,7 +1,5 @@
 import React from 'react'
-import UpdateButton from '../../../../util/commonComponent/UpdateButton';
-import DeleteButton from '../../../../util/commonComponent/DeleteButton';
-import BackButton from '../../../../util/commonComponent/BackButton';
+import BackButton from '../../../../util/common/BackButton';
 import { browserHistory } from 'react-router';
 class UserInformation extends React.Component {
   render() {

@@ -10,8 +10,8 @@ import { reduxForm } from 'redux-form';
 const requiredForInput = value => value ? undefined : 'Vui lòng không để trống!';
 const maxLength = max => value => value && value.length > max ? `Vui lòng nhập dưới ${max} kí tự!` : undefined;
 
+let titleName = 'Setting users';
 const UserCreate = () => {
-  let titleName = 'Setting users';
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}/>
