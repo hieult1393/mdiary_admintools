@@ -1,12 +1,10 @@
-import PageContent from '../../../../util/common/PageContent';
-import HeaderPageContent from '../../../../util/common/HeaderPageContent';
-import AddButton from '../../../../util/common/AddButton';
+import PageContent, { HeaderPageContent, AddButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton, AccountButton } from '../../../../util/common/Table';
 import { fetchUserData, getCurrentUserData } from '../UserAction';
 import React from 'react';
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
-import { userDataSelector, fetchUserDataSelector } from '../UserReducer';
+import { usersListSelector, fetchUserDataSuccessSelector } from '../UserReducer';
 import { browserHistory } from 'react-router';
 
 const tableHeaderList = [
@@ -15,15 +13,15 @@ const tableHeaderList = [
 
 const UserIndex = (props) => {
   let titleName = 'Setting users';
-  const { userListSelector, fetchUserDataSelector, getCurrentUserData } = props;
+  const { usersList, getCurrentUserData } = props;
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
         <AddButton style={{ marginRight: '5px' }}
-                   onClick={() => browserHistory.push(`/settingUser/userCreate`)}/>
+                   onClick={() => browserHistory.push(`/settingUser/create`)}/>
       </HeaderPageContent>
       <Table tableHeaderList={tableHeaderList}>
-        {userListSelector.map((user, index) => (
+        {usersList.map((user, index) => (
           <TableRow key={index}>
             <TableColumn value={index + 1}/>
             <TableColumn value={user.name}/>
@@ -35,7 +33,7 @@ const UserIndex = (props) => {
                 <DeleteButton/>
                 <AccountButton onClick={() => {
                   getCurrentUserData(user);
-                  browserHistory.push(`/settingAccount`)
+                  browserHistory.push(`/settingAccount`);
                 }}/>
               </div>
             }/>
@@ -43,16 +41,17 @@ const UserIndex = (props) => {
         ))}
       </Table>
     </PageContent>
-  )
+  );
 };
 const EnhanceUserIndex = compose(
   connect(
     state => ({
-      userListSelector: userDataSelector(state),
-      fetchUserDataSelector: fetchUserDataSelector(state),
+      usersList: usersListSelector(state),
+      fetchUserDataSuccess: fetchUserDataSuccessSelector(state),
     }),
     ({
-      fetchUserData, getCurrentUserData
+      fetchUserData,
+      getCurrentUserData,
     })
   ),
   lifecycle({

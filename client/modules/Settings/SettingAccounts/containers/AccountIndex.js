@@ -1,30 +1,31 @@
-import PageContent from '../../../../util/common/PageContent';
-import HeaderPageContent from '../../../../util/common/HeaderPageContent';
-import AddButton from '../../../../util/common/AddButton';
-import BackButton from '../../../../util/common/BackButton';
+import PageContent, { HeaderPageContent, AddButton, BackButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton } from '../../../../util/common/Table';
 import { currentUserDataSelector } from '../../SettingUsers/UserReducer';
 import React from 'react';
-import { compose } from 'recompose'
-import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-const tableHeaderList = [
-  'UserName', 'Password', 'Option'];
+import { browserHistory } from 'react-router';
+import { compose, lifecycle } from 'recompose';
 
+const tableHeaderList = [
+  'STT', 'User Name', 'Password', 'Type', 'Options',
+];
 
 const AccountIndex = (props) => {
-  const { currentUser }= props;
-  const titleName = `${currentUser.name}`;
+  const { currentUserData } = props;
+  const titleName = `${currentUserData.name}`;
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
-        <AddButton style={{ marginRight: '5px' }} onClick={() => browserHistory.push(`/settingAccount/accountCreate`)}/>
+        <AddButton style={{ marginRight: '5px' }}
+                   onClick={() => browserHistory.push(`/settingUser/create`)}/>
         <BackButton onClick={() => browserHistory.goBack()}/>
       </HeaderPageContent>
       <Table tableHeaderList={tableHeaderList}>
-        <TableRow>
-          <TableColumn value={currentUser.username}/>
-          <TableColumn value={currentUser.password}/>
+        <TableRow >
+          <TableColumn value={1}/>
+          <TableColumn value={currentUserData.username}/>
+          <TableColumn value={currentUserData.password}/>
+          <TableColumn value={currentUserData.type_id}/>
           <TableColumn value={
             <div>
               <UpdateButton/>
@@ -34,16 +35,13 @@ const AccountIndex = (props) => {
         </TableRow>
       </Table>
     </PageContent>
-  
-  
   );
 };
 
 const EnhanceAccountIndex = compose(
-  //state => (currentUser: getCurrentUserDataSelector), ({ getCurrentUserData })
   connect(
     state => ({
-      currentUser: currentUserDataSelector(state),
+      currentUserData: currentUserDataSelector(state),
     })
   )
 )(AccountIndex);

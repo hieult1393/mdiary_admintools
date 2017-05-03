@@ -1,5 +1,4 @@
-import PageContent from '../../../../util/common/PageContent';
-import HeaderPageContent from '../../../../util/common/HeaderPageContent';
+import PageContent, { HeaderPageContent } from '../../../../util/common/PageContent';
 import { Form, FormRow, FormColumn, CancelButton, SaveButton, Input, FieldInput } from '../../../../util/common/Form';
 import React from 'react';
 import { connect } from 'react-redux';

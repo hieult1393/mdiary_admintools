@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import UploadImage from './UploadImage';
+import Editor from './Editor';
 
 export const Input = ({ input, placeholder, label, type, meta: { touched, error } }) => (
   <div className={`form-group ${touched && error ? 'has-error' : ''}`}>
@@ -51,6 +53,23 @@ export const FieldSelect = (labelName, fieldName, component, data, validate, opt
         <option value={item.id} key={item.id}>{item.name}</option>
       )) : null}
   </Field>
+);
+
+export const FieldImage = (labelName, fieldName, props, imgUrlCreated) => (
+  <div>
+    <Field name={fieldName} component='hidden'/>
+    <UploadImage labelName={labelName} fieldName={fieldName} imgUrlCreated={imgUrlCreated} {...props} />
+  </div>
+);
+
+export const FieldEditor = (labelName, fieldName, props, descriptionValueCreated) => (
+  <div className='form-group'>
+    <label className='col-md-2 control-label' style={{ width: '20.25%' }}>{labelName}</label>
+    <div className='col-md-8' style={{ width: '70%' }}>
+      <Field name={fieldName} component='hidden' type='text'/>
+      <Editor fieldName={fieldName} descriptionValueCreated={descriptionValueCreated} {...props}/>
+    </div>
+  </div>
 );
 
 export class FormRow extends React.Component {

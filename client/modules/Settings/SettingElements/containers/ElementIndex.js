@@ -1,47 +1,84 @@
-import React from 'react';
-import PageContent from '../../../../util/common/PageContent';
-import HeaderPageContent from '../../../../util/common/HeaderPageContent';
+import PageContent, { HeaderPageContent, AddButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton } from '../../../../util/common/Table';
-import AddButton from '../../../../util/common/AddButton';
+import Confirm from '../../../../util/common/Confirm';
+import {
+  elementsListSelector,
+  createElementSuccessSelector,
+  updateElementSuccessSelector,
+  deleteElementSuccessSelector,
+} from '../ElementReducer';
+import { Toast } from '../../../../util/common/Toast';
+import { deleteElement, initDataForUpdateElementForm } from '../ElementAction';
+import config from '../../../../../configs/config';
+import React from 'react';
 import { browserHistory } from 'react-router';
 import { fetchElementData } from '../ElementAction';
-import { compose, lifecycle } from 'recompose';
+import { compose, withState, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
-import { elementDataSelector, fetchElementDataSelector } from '../ElementReducer';
+
 const tableHeaderList = [
-  'S.No', 'FarmID', 'TypeID', 'TypeName', 'Name', 'Years of Harvest', 'Description', 'Image', 'Created_at', 'Updated_at', 'Option'
+  'S.No', 'TypeName', 'Name', 'Description', 'Image', 'Option'
 ];
+
+const showImage = (element) => {
+  const imgUrlDefault = '/img/no-image.png';
+  const imgUrl = `${config.assets_url}upload/images/${element.images}`;
+  return (
+    <img src={element.images ? imgUrl : imgUrlDefault}
+         style={{ width: '90px', height: '90px' }}/>
+  );
+};
+
+const showConfirm = (elementId, deleteElement, setDeleting) => {
+  return (
+    <Confirm
+      onConfirm={() => {
+        deleteElement(elementId);
+        setDeleting(false);
+      }}
+      onCancel={() => setDeleting(false)}/>
+  );
+};
+
+const convertHtmlToString = (value) => (
+  <p dangerouslySetInnerHTML={{ __html: value }}/>
+);
+
 const ElementIndex = (props) => {
-  const { elementData } = props;
+  const { elementsList, setCurrentElementId, currentElementId, setDeleting, deleting, deleteElement } = props;
+  const { createElementSuccess, updateElementSuccess, deleteElementSuccess, initDataForUpdateElementForm } = props;
   const titleName = 'Elements';
+  Toast(createElementSuccess, updateElementSuccess, deleteElementSuccess);
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
         <AddButton style={{ marginRight: '5px' }}
-                   onClick={() => browserHistory.push(`settingElement/elementCreate`)}/>
+                   onClick={() => browserHistory.push(`settingElement/create`)}/>
       </HeaderPageContent>
       <Table tableHeaderList={tableHeaderList}>
-        {elementData.map((elementData, index) => (
-          <TableRow key={elementData.id}>
+        {elementsList.map((element, index) => (
+          <TableRow key={element.id}>
             <TableColumn value={index + 1}/>
-            <TableColumn value={elementData.farm_id}/>
-            <TableColumn value={elementData.type_id}/>
-            <TableColumn value={elementData.type_name}/>
-            <TableColumn value={elementData.name}/>
-            <TableColumn value={elementData.years_of_harvest}/>
-            <TableColumn value={elementData.description}/>
-            <TableColumn value={elementData.images}/>
-            <TableColumn value={elementData.created_at}/>
-            <TableColumn value={elementData.updated_at}/>
+            <TableColumn value={element.type_name}/>
+            <TableColumn value={element.name}/>
+            <TableColumn value={convertHtmlToString(element.description)}/>
+            <TableColumn value={showImage(element)}/>
             <TableColumn value={
               <div>
-                <UpdateButton/>
-                <DeleteButton/>
+                <UpdateButton onClick={() => {
+                  initDataForUpdateElementForm(element);
+                  browserHistory.push(`settingElement/update`);
+                }}/>
+                <DeleteButton onClick={() => {
+                  setCurrentElementId(element.id);
+                  setDeleting(true);
+                }}/>
               </div>
             }/>
           </TableRow>
         ))}
       </Table>
+      {deleting ? showConfirm(currentElementId, deleteElement, setDeleting) : null}
     </PageContent>
   )
 };
@@ -49,13 +86,19 @@ const ElementIndex = (props) => {
 const EnhanceElementIndex = compose(
   connect(
     state => ({
-      elementData: elementDataSelector(state),
-      fetchElementDataSelector: fetchElementDataSelector(state),
+      elementsList: elementsListSelector(state),
+      createElementSuccess: createElementSuccessSelector(state),
+      updateElementSuccess: updateElementSuccessSelector(state),
+      deleteElementSuccess: deleteElementSuccessSelector(state),
     }),
     ({
       fetchElementData,
+      deleteElement,
+      initDataForUpdateElementForm,
     })
   ),
+  withState('deleting', 'setDeleting', false),
+  withState('currentElementId', 'setCurrentElementId', null),
   lifecycle({
     componentDidMount(){
       const { fetchElementData } = this.props;

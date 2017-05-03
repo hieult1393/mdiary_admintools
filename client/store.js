@@ -10,7 +10,7 @@ import rootReducer from './reducers';
 
 const epics = combineEpics(
   rootEpic,
-  loginEpic
+  loginEpic,
 );
 const epicMiddleware = createEpicMiddleware(epics);
 
@@ -31,7 +31,7 @@ export function configureStore(initialState = {}) {
       epicMiddleware),
     //DevTools.instrument(),
   ];
-  
+
   if (process.env.CLIENT && process.env.NODE_ENV === 'development') {
     // Enable DevTools only when rendering on client and during development.
     // enhancers.push(window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument());
@@ -50,6 +50,7 @@ export function configureStore(initialState = {}) {
       epicMiddleware.replaceEpic(nextRootEpic);
     });
   }
-  
+
   return store;
 }
+export const store = configureStore();

@@ -7,10 +7,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { isEmpty } from 'lodash';
-import ReduxToastr from 'react-redux-toastr';
+import Toast from 'react-redux-toastr';
 import links from '../../util/links.json';
 import Helmet from 'react-helmet';
-
 
 const mapStateToProps = (state) => ({
   showSidebar: showSidebarSelector(state),
@@ -32,7 +31,6 @@ class App extends React.Component {
 
   render() {
     const fixStyle = this.props.showHeader === false ? { marginTop: '0' } : {};
-
     return (
       <div>
         <Helmet
@@ -57,13 +55,13 @@ class App extends React.Component {
             },
           ]}
         />
-        <ReduxToastr
-          timeOut={4000}
+        <Toast
+          timeOut={3000}
           newestOnTop={false}
           preventDuplicates={true}
           position="bottom-right"
-          transitionIn="fadeIn"
-          transitionOut="fadeOut"/>
+          transitionIn="bounceIn"
+          transitionOut="bounceOut"/>
         <div className="page-container" style={fixStyle}>
           <div className="page-content-wrapper">
             <div className="page-wrapper">

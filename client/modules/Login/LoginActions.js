@@ -13,7 +13,7 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOG_OUT = 'LOG_OUT';
 export const LOG_IN = 'LOG_IN';
 
-import headerAttachToken, { randomString }  from '../../util/setAuthorizationToken';
+import { attachToken }   from '../../util/setAuthorizationToken';
 
 export function initLogin() {
   return {
@@ -55,7 +55,7 @@ export function updateFarmer(id, data) {
     'updateFarmer',
     () => ({
       endpoint: `${config.api_url}api/farmers/update/${id}`,
-      headers: headerAttachToken,
+      headers: attachToken,
       method: 'PUT',
       body: JSON.stringify(data),
     })
