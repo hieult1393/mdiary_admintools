@@ -31,13 +31,13 @@ export function configureStore(initialState = {}) {
       epicMiddleware),
     //DevTools.instrument(),
   ];
-
-  //if (process.env.CLIENT && process.env.NODE_ENV === 'development') {
-  // Enable DevTools only when rendering on client and during development.
-  // enhancers.push(window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument());
-  //enhancers.push(window.devToolsExtension());
-  //}
-
+  
+  if (process.env.CLIENT && process.env.NODE_ENV === 'development') {
+    // Enable DevTools only when rendering on client and during development.
+    // enhancers.push(window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument());
+    enhancers.push(window.devToolsExtension());
+  }
+  
   const store = createStore(rootReducer, initialState, compose(...enhancers, autoRehydrate()));
   const presitor = persistStore(store, { blacklist: ['routing', 'AppReducer'] });
   if (module.hot) {
@@ -50,6 +50,6 @@ export function configureStore(initialState = {}) {
       epicMiddleware.replaceEpic(nextRootEpic);
     });
   }
-
+  
   return store;
 }

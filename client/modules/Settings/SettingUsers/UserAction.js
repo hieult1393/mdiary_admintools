@@ -1,8 +1,8 @@
 import axios from 'axios';
-export const FETCH_UD_SUCCESS = 'FETCH_UD_SUCCESS';
-export const FETCH_UD_FAILURE = 'FETCH_UD-FAILURE';
-
-export function fetchUdData() {
+export const FETCH_USER_DATA_SUCCESS = 'FETCH_USER_DATA_SUCCESS';
+export const FETCH_USER_DATA_FAILURE = 'FETCH_USER_DATA_FAILURE';
+export const GET_CURRENT_USER_DATA = 'GET_CURRENT_USER_DATA';
+export function fetchUserData() {
   return (dispatch) => {
     const url = `http://devapimdiary.mimosatek.com/api/users/getAll`;
     
@@ -16,14 +16,21 @@ export function fetchUdData() {
       .then(response => {
         if (response.data.success) {
           dispatch({
-            type: FETCH_UD_SUCCESS,
+            type: FETCH_USER_DATA_SUCCESS,
             payload: response.data.payload
           })
         } else dispatch({
-          type: FETCH_UD_FAILURE,
+          type: FETCH_USER_DATA_FAILURE,
           payload: []
         })
       })
   }
-  
 }
+
+export function getCurrentUserData(userData) {
+  return {
+    type: GET_CURRENT_USER_DATA,
+    payload: userData,
+  }
+}
+
