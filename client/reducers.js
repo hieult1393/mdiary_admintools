@@ -8,12 +8,16 @@ import LoginReducer from './modules/Login/LoginReducer';
 import AppReducer from './modules/App/AppReducer';
 import UserReducer from './modules/Settings/SettingUsers/UserReducer';
 import ElementReducer from './modules/Settings/SettingElements/ElementReducer';
+import SeasonReducer from './modules/Settings/SettingSeasons/SeasonReducer';
+import PhaseReducer from './modules/Settings/SettingPhases/PhaseReducer';
 
 const rootReducer = combineReducers({
   LoginReducer,
   AppReducer,
   UserReducer,
   ElementReducer,
+  SeasonReducer,
+  PhaseReducer,
   routing: routerReducer,
   form: formReducer,
   toastr: toastrReducer,

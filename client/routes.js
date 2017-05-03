@@ -8,6 +8,12 @@ import AccountIndex from './modules/Settings/SettingAccounts/containers/AccountI
 import ElementIndex from './modules/Settings/SettingElements/containers/ElementIndex';
 import ElementCreate from './modules/Settings/SettingElements/containers/ElementCreate';
 import ElementUpdate from './modules/Settings/SettingElements/containers/ElementUpdate';
+import SeasonIndex from './modules/Settings/SettingSeasons/containers/SeasonIndex';
+import SeasonCreate from './modules/Settings/SettingSeasons/containers/SeasonCreate';
+import SeasonUpdate from './modules/Settings/SettingSeasons/containers/SeasonUpdate';
+import PhaseIndex from './modules/Settings/SettingPhases/containers/PhaseIndex';
+import PhaseCreate from './modules/Settings/SettingPhases/containers/PhaseCreate';
+import PhasesUpdate from './modules/Settings/SettingPhases/containers/PhasesUpdate';
 
 if (typeof require.ensure !== 'function') {
   require.ensure = function requireModule(deps, callback) {
@@ -24,5 +30,11 @@ export default (
     <Route path="/settingElement" component={ElementIndex}/>
     <Route path="/settingElement/create" component={ElementCreate}/>
     <Route path="/settingElement/update" component={ElementUpdate}/>
+    <Route path="/settingSeason/:elementId" component={SeasonIndex}/>
+    <Route path="/settingSeason/:elementId/create" component={SeasonCreate}/>
+    <Route path="/settingSeason/:elementId/update" component={SeasonUpdate}/>
+    <Route path="/settingSeason/:elementId/settingPhase/:seasonId" component={PhaseIndex}/>
+    <Route path="/settingSeason/:elementId/settingPhase/:seasonId/create" component={PhaseCreate}/>
+    <Route path="/settingSeason/:elementId/settingPhase/:seasonId/update" component={PhasesUpdate}/>
   </Route>
 );

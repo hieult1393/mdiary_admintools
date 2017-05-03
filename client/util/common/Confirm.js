@@ -6,8 +6,8 @@ export default class Confirm extends React.Component {
     return (
       <SweetAlert warning
                   showCancel
-                  confirmBtnText='Có'
-                  cancelBtnText='Không'
+                  confirmBtnText='Yes'
+                  cancelBtnText='No'
                   confirmBtnBsStyle='danger'
                   cancelBtnBsStyle='default'
                   title='Are you sure?'

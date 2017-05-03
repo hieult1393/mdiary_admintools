@@ -1,6 +1,7 @@
 import PageContent, { HeaderPageContent, AddButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton } from '../../../../util/common/Table';
 import Confirm from '../../../../util/common/Confirm';
+import { fetchElementData, deleteElement, initDataForUpdateElementForm } from '../ElementAction';
 import {
   elementsListSelector,
   createElementSuccessSelector,
@@ -8,16 +9,14 @@ import {
   deleteElementSuccessSelector,
 } from '../ElementReducer';
 import { Toast } from '../../../../util/common/Toast';
-import { deleteElement, initDataForUpdateElementForm } from '../ElementAction';
 import config from '../../../../../configs/config';
 import React from 'react';
-import { browserHistory } from 'react-router';
-import { fetchElementData } from '../ElementAction';
-import { compose, withState, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+import { compose, withState, lifecycle } from 'recompose';
 
 const tableHeaderList = [
-  'S.No', 'TypeName', 'Name', 'Description', 'Image', 'Option'
+  'S.No', 'Name', 'Type name', 'Description', 'Image', 'Option'
 ];
 
 const showImage = (element) => {
@@ -59,8 +58,8 @@ const ElementIndex = (props) => {
         {elementsList.map((element, index) => (
           <TableRow key={element.id}>
             <TableColumn value={index + 1}/>
+            <TableColumn value={element.name} onClick={() => browserHistory.push(`/settingSeason/${element.id}`)}/>
             <TableColumn value={element.type_name}/>
-            <TableColumn value={element.name}/>
             <TableColumn value={convertHtmlToString(element.description)}/>
             <TableColumn value={showImage(element)}/>
             <TableColumn value={

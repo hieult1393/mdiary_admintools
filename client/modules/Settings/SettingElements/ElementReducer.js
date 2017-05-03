@@ -24,7 +24,6 @@ const ElementReducer = (state = initialState, action) => {
     case CREATE_ELEMENT_FAILURE:
       return { ...state, createElementSuccess: false };
     case UPDATE_ELEMENT_SUCCESS: {
-      console.log('action.payload update: ', action.payload);
       const elementsList = state.data;
       const index = findIndex(elementsList, element => element.id === action.payload.id);
       elementsList.splice(index, 1, action.payload);
