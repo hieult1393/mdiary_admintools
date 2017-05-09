@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { attachTokenAxios } from '../../../util/setAuthorizationToken';
+import config from '../../../../configs/config';
 
 export const FETCH_PHASE_DATA_SUCCESS = 'FETCH_PHASE_DATA_SUCCESS';
 export const CREATE_PHASE_SUCCESS = 'CREATE_PHASE_SUCCESS';
@@ -12,7 +13,7 @@ export const INIT_DATA_FOR_UPDATE_PHASE_FORM = 'INIT_DATA_FOR_UPDATE_PHASE_FORM'
 
 export function fetchPhaseData(id) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/phases/getAll`;
+    const url = `${config.api_url}api/phases/getAll`;
     const params = { season_id: id };
     const configs = {
       headers: attachTokenAxios(getState),
@@ -31,7 +32,7 @@ export function fetchPhaseData(id) {
 
 export function createPhase(data) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/phases/create`;
+    const url = `${config.api_url}api/phases/create`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -54,7 +55,7 @@ export function createPhase(data) {
 
 export function updatePhase(id, data) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/phases/update/${id}`;
+    const url = `${config.api_url}api/phases/update/${id}`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -76,7 +77,7 @@ export function updatePhase(id, data) {
 
 export function deletePhase(id) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/phases/delete/${id}`;
+    const url = `${config.api_url}api/phases/delete/${id}`;
     const configs = {
       headers: attachTokenAxios(getState),
     };

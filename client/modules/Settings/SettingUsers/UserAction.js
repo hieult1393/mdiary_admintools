@@ -1,28 +1,32 @@
 import axios from 'axios';
+import { attachTokenAxios } from '../../../util/setAuthorizationToken';
+import config from '../../../../configs/config';
+
 export const FETCH_USER_DATA_SUCCESS = 'FETCH_USER_DATA_SUCCESS';
-export const FETCH_USER_DATA_FAILURE = 'FETCH_USER_DATA_FAILURE';
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
+export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
+export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
+export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
+export const INIT_DATA_FOR_UPDATE_USER_FORM = 'INIT_DATA_FOR_UPDATE_USER_FORM';
 export const GET_CURRENT_USER_DATA = 'GET_CURRENT_USER_DATA';
+export const GET_USER_TYPE = 'GET_USER_TYPE';
 
 export function fetchUserData() {
-  return (dispatch) => {
-    const url = `http://devapimdiary.mimosatek.com/api/users/getAllFarmersOrBuyersByType`;
-    let author = {
-      Authorization: 'tezPs13792ddfc14f18213c8f15e4b02f5d32eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZhcm1lciIsImlhdCI6MTQ5MzA4NzY3NiwiZXhwIjoxNDk1Njc5Njc2fQ.XhqP1YMpJxlcDMZZZ9mW4wGCO1mblf2RwOPL13kqID0',
+  return (dispatch, getState) => {
+    const url = `${config.api_url}api/users/getAllFarmersOrBuyersByType`;
+    const configs = {
+      headers: attachTokenAxios(getState),
     };
-    const config = {
-      headers: author
-    };
-    axios.get(url, config)
+    axios.get(url, configs)
       .then(response => {
         if (response.data.success) {
           dispatch({
             type: FETCH_USER_DATA_SUCCESS,
             payload: response.data.payload
           })
-        } else dispatch({
-          type: FETCH_USER_DATA_FAILURE,
-          payload: []
-        })
+        }
       })
   }
 }
@@ -105,5 +109,12 @@ export function initDataForUpdateUserForm(data) {
     type: INIT_DATA_FOR_UPDATE_USER_FORM,
     payload: data,
   };
+}
+
+export function getUserType(typeId) {
+  return {
+    type: GET_USER_TYPE,
+    payload: typeId
+  }
 }
 

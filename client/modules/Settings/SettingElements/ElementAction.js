@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { attachTokenAxios } from '../../../util/setAuthorizationToken';
+import config from '../../../../configs/config';
 
 export const FETCH_ELEMENT_DATA_SUCCESS = 'FETCH_ELEMENT_DATA_SUCCESS';
 export const CREATE_ELEMENT_SUCCESS = 'CREATE_ELEMENT_SUCCESS';
@@ -12,7 +13,7 @@ export const INIT_DATA_FOR_UPDATE_ELEMENT_FORM = 'INIT_DATA_FOR_UPDATE_ELEMENT_F
 
 export function fetchElementData() {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/elements/getAll`;
+    const url = `${config.api_url}api/elements/getAll`;
     const configs = {
       headers: attachTokenAxios(getState),
     };
@@ -30,7 +31,7 @@ export function fetchElementData() {
 
 export function createElement(data) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/elements/create`;
+    const url = `${config.api_url}api/elements/create`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -53,7 +54,7 @@ export function createElement(data) {
 
 export function updateElement(id, data) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/elements/update/${id}`;
+    const url = `${config.api_url}api/elements/update/${id}`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -75,7 +76,7 @@ export function updateElement(id, data) {
 
 export function deleteElement(id) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/elements/delete/${id}`;
+    const url = `${config.api_url}api/elements/delete/${id}`;
     const configs = {
       headers: attachTokenAxios(getState),
     };

@@ -38,9 +38,9 @@ const ElementReducer = (state = initialState, action) => {
         deleteElementSuccess: true,
       };
     case DELETE_ELEMENT_FAILURE:
-      return { ...state, deleteSuccess: false };
+      return { ...state, deleteElementSuccess: false };
     case INIT_DATA_FOR_UPDATE_ELEMENT_FORM:
-      return { ...state, initDataForUpdateElementForm: action.payload };
+      return { ...state, initDataForUpdateElementForm: get(action, 'payload', {}) };
     case '@ReduxToastr/toastr/CLEAN':
       return { ...state, createElementSuccess: null, updateElementSuccess: null, deleteElementSuccess: null };
     default:

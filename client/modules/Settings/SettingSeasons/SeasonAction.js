@@ -9,10 +9,11 @@ export const UPDATE_SEASON_FAILURE = 'UPDATE_SEASON_FAILURE';
 export const DELETE_SEASON_SUCCESS = 'DELETE_SEASON_SUCCESS';
 export const DELETE_SEASON_FAILURE = 'DELETE_SEASON_FAILURE';
 export const INIT_DATA_FOR_UPDATE_SEASON_FORM = 'INIT_DATA_FOR_UPDATE_SEASON_FORM';
+import config from '../../../../configs/config';
 
 export function fetchSeasonData(id) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/seasons/getAll`;
+    const url = `${config.api_url}api/seasons/getAll`;
     const params = { element_id: id };
     const configs = {
       headers: attachTokenAxios(getState),
@@ -31,7 +32,7 @@ export function fetchSeasonData(id) {
 
 export function createSeason(data) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/seasons/create`;
+    const url = `${config.api_url}api/seasons/create`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -53,7 +54,7 @@ export function createSeason(data) {
 
 export function updateSeason(id, data) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/seasons/update/${id}`;
+    const url = `${config.api_url}api/seasons/update/${id}`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -75,7 +76,7 @@ export function updateSeason(id, data) {
 
 export function deleteSeason(id) {
   return (dispatch, getState) => {
-    const url = `http://devapimdiary.mimosatek.com/api/seasons/delete/${id}`;
+    const url = `${config.api_url}api/seasons/delete/${id}`;
     const configs = {
       headers: attachTokenAxios(getState),
     };

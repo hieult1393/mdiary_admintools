@@ -1,33 +1,36 @@
 import PageContent, { HeaderPageContent } from '../../../../util/common/PageContent';
 import { Form, FormRow, FormColumn, CancelButton, SaveButton, Input, FieldInput } from '../../../../util/common/Form';
+import { getUserType } from '../UserAction';
+import { userTypeSelector } from '../UserReducer';
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { Select, FieldSelect } from '../../../../util/common/Form';
 import { compose, withState } from 'recompose';
 import { reduxForm } from 'redux-form';
 import BuyerForm from '../components/BuyerForm';
 import FarmerForm from '../components/FarmerForm';
+import { UserTypeSelect } from '../components/UserTypeSelect';
 
 const requiredForInput = value => value ? undefined : 'Vui lòng không để trống!';
 const maxLength = max => value => value && value.length > max ? `Vui lòng nhập dưới ${max} kí tự!` : undefined;
 const optionDefault = () => (<option value='' key={0}>Choose type name</option>);
-const typeNameList = [{ id: 1, name: 'Buyer' }, { id: 2, type_name: 'Farmer' }];
+const typeNameList = [{ id: 1, name: 'Buyer' }, { id: 2, name: 'Farmer' }];
 
 const showForm = (userType) => {
-  if (userType === 1)
+  if (userType == 1)
     return <BuyerForm/>;
-    else
-  return <FarmerForm/>;
+  else if (userType == 2)
+    return <FarmerForm/>;
+  return null
 };
 
 const UserCreate = (props) => {
   let titleName = 'Setting users';
-  const { userType } = props;
-  console.log('userType :', userType);
+  const { userType }  = props;
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}/>
+      {UserTypeSelect(typeNameList, props)}
       {showForm(userType)}
     </PageContent>
   );
@@ -35,10 +38,13 @@ const UserCreate = (props) => {
 
 const EnhanceUserCreate = compose(
   connect(
-    state => ({}),
-    ({})
+    state => ({
+      userType: userTypeSelector(state),
+    }),
+    ({
+      getUserType,
+    })
   ),
-  withState('userType', 'setUserType', 1),
   reduxForm({
     form: 'userCreate',
   })

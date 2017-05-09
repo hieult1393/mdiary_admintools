@@ -39,7 +39,7 @@ const ElementCreate = (props) => {
             {FieldImage('Image', 'images', props)}
           </FormColumn>
         </FormRow>
-        <FormRow className="row">
+        <FormRow>
           {FieldEditor('Description', 'description', props)}
         </FormRow>
         <FormRow>

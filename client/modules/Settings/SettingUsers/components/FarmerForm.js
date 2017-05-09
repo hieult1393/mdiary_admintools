@@ -23,12 +23,16 @@ const FarmerForm = (props) => {
         <FormColumn style={{ marginLeft: '5%' }}>
           {FieldInput('Name *', 'name', Input, [requiredForInput, maxLength(20)], 'text', 'Input name')}
           {FieldInput('Gender *', 'gender', Input, [requiredForInput], 'text', 'Input gender')}
+          {FieldInput('Address *', 'address', Input, [requiredForInput], 'text', 'Input address')}
+        </FormColumn>
+        <FormColumn>
           {FieldInput('PhoneNo *', 'phone', Input, [requiredForInput], 'number', 'Input phoneNo')}
           {FieldInput('BirthDay *', 'birthday', Input, [requiredForInput], 'number', 'Input birthday')}
-          {FieldInput('Address *', 'address', Input, [requiredForInput], 'text', 'Input address')}
           {FieldInput('Main Plant *', 'mainplant', Input, [requiredForInput], 'text', 'Input main plaint')}
-          {FieldEditor('Description', 'description', props) }
         </FormColumn>
+      </FormRow>
+      <FormRow>
+        {FieldEditor('Description', 'description', props)}
       </FormRow>
       <FormRow>
         <div style={{ float: 'right', marginRight: '3%' }}>
