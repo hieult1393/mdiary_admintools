@@ -3,10 +3,10 @@ import { attachTokenAxios } from '../../../util/setAuthorizationToken';
 import config from '../../../../configs/config';
 
 export const FETCH_USER_DATA_SUCCESS = 'FETCH_USER_DATA_SUCCESS';
-export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
-export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
-export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
-export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
+export const CREATE_FARMER_SUCCESS = 'CREATE_FARMER_SUCCESS';
+export const CREATE_FARMER_FAILURE = 'CREATE_FARMER_FAILURE';
+export const CREATE_BUYER_SUCCESS = 'CREATE_BUYER_SUCCESS';
+export const CREATE_BUYER_FAILURE = 'CREATE_BUYER_FAILURE';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
 export const INIT_DATA_FOR_UPDATE_USER_FORM = 'INIT_DATA_FOR_UPDATE_USER_FORM';
@@ -15,7 +15,7 @@ export const GET_USER_TYPE = 'GET_USER_TYPE';
 
 export function fetchUserData() {
   return (dispatch, getState) => {
-    const url = `${config.api_url}api/users/getAllFarmersOrBuyersByType`;
+    const url = `${config.api_url}/api/users/getAllFarmersOrBuyersByType`;
     const configs = {
       headers: attachTokenAxios(getState),
     };
@@ -38,9 +38,9 @@ export function getCurrentUserData(userData) {
   }
 }
 
-export function createUser(data) {
+export function createFarmer(data) {
   return (dispatch, getState) => {
-    const url = `${config.api_url}api/users/create`;
+    const url = `${config.api_url}api/farmers/create`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -50,33 +50,33 @@ export function createUser(data) {
         console.log('response: ', response);
         if (response.data.success) {
           dispatch({
-            type: CREATE_USER_SUCCESS,
+            type: CREATE_FARMER_SUCCESS,
             payload: response.data.payload
           })
         } else dispatch({
-          type: CREATE_USER_FAILURE,
+          type: CREATE_FARMER_FAILURE,
           payload: {}
         })
       })
   }
 }
-
-export function updateUser(id, data) {
+export function createBuyer(data) {
   return (dispatch, getState) => {
-    const url = `${config.api_url}api/elements/update/${id}`;
+    const url = `${config.api_url}api/buyers/create`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
     };
-    axios.put(url, params, configs)
+    axios.post(url, params, configs)
       .then(response => {
+        console.log('response: ', response);
         if (response.data.success) {
           dispatch({
-            type: UPDATE_USER_SUCCESS,
+            type: CREATE_BUYER_SUCCESS,
             payload: response.data.payload
           })
         } else dispatch({
-          type: UPDATE_USER_FAILURE,
+          type: CREATE_BUYER_FAILURE,
           payload: {}
         })
       })

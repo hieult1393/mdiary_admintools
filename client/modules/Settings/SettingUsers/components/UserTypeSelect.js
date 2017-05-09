@@ -5,7 +5,7 @@ export const UserTypeSelect = (data, props) => {
   return (
     <div className='portlet-body'>
       <form className='form-horizontal'
-            style={{ borderBottomStyle: 'solid', borderWidth: '1px', borderColor: '#eee' }}>
+            style={{ borderBottomStyle: 'solid', borderWidth: '1px', borderColor: '#6aee0f' }}>
         <div className='row'>
           <div className="col-md-5" style={{ marginLeft: '11%' }}>
             <div className='form-group'>
@@ -26,3 +26,5 @@ export const UserTypeSelect = (data, props) => {
     </div>
   );
 };
+
+

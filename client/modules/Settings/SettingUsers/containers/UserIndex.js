@@ -1,10 +1,11 @@
 import PageContent, { HeaderPageContent, AddButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton, AccountButton } from '../../../../util/common/Table';
-import { fetchUserData, getCurrentUserData, initDataForUpdateElementForm } from '../UserAction';
+import { Toast } from '../../../../util/common/Toast';
+import { fetchUserData, getCurrentUserData } from '../UserAction';
+import { usersListSelector, createUserSuccessSelector } from '../UserReducer';
 import React from 'react';
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
-import { usersListSelector } from '../UserReducer';
 import { browserHistory } from 'react-router';
 
 const tableHeaderList = [
@@ -47,6 +48,7 @@ const EnhanceUserIndex = compose(
   connect(
     state => ({
       usersList: usersListSelector(state),
+      createUserSuccess: createUserSuccessSelector(state),
     }),
     ({
       fetchUserData,
@@ -57,6 +59,10 @@ const EnhanceUserIndex = compose(
     componentDidMount(){
       const { fetchUserData } = this.props;
       fetchUserData();
+    },
+    componentWillReceiveProps(nextProps){
+      const { createUserSuccess } = nextProps;
+      Toast(createUserSuccess);
     }
   })
 )(UserIndex);
