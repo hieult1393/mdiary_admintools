@@ -1,6 +1,6 @@
 import PageContent, { HeaderPageContent, AddButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton, AccountButton } from '../../../../util/common/Table';
-import { fetchUserData, getCurrentUserData } from '../UserAction';
+import { fetchUserData, getCurrentUserData,initDataForUpdateElementForm } from '../UserAction';
 import React from 'react';
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';

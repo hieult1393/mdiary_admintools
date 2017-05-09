@@ -1,6 +1,7 @@
 import PageContent, { HeaderPageContent, AddButton, BackButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton } from '../../../../util/common/Table';
 import { currentUserDataSelector } from '../../SettingUsers/UserReducer';
+import Toast from '../../../../util/common/Toast';
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -13,11 +14,12 @@ const tableHeaderList = [
 const AccountIndex = (props) => {
   const { currentUserData } = props;
   const titleName = `${currentUserData.name}`;
+  Toast(CreateAccountSuccess, UpdateAccountSuccess, DeleteAccountSuccess)
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
         <AddButton style={{ marginRight: '5px' }}
-                   onClick={() => browserHistory.push(`/settingUser/create`)}/>
+                   onClick={() => browserHistory.push(`/settingAccount/create`)}/>
         <BackButton onClick={() => browserHistory.goBack()}/>
       </HeaderPageContent>
       <Table tableHeaderList={tableHeaderList}>
