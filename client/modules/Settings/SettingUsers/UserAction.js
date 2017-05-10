@@ -47,7 +47,6 @@ export function createFarmer(data) {
     };
     axios.post(url, params, configs)
       .then(response => {
-        console.log('response: ', response);
         if (response.data.success) {
           dispatch({
             type: CREATE_FARMER_SUCCESS,
@@ -60,6 +59,7 @@ export function createFarmer(data) {
       })
   }
 }
+
 export function createBuyer(data) {
   return (dispatch, getState) => {
     const url = `${config.api_url}api/buyers/create`;
@@ -69,7 +69,6 @@ export function createBuyer(data) {
     };
     axios.post(url, params, configs)
       .then(response => {
-        console.log('response: ', response);
         if (response.data.success) {
           dispatch({
             type: CREATE_BUYER_SUCCESS,
@@ -83,15 +82,35 @@ export function createBuyer(data) {
   }
 }
 
-export function deleteUser(id) {
+export function deleteBuyer(id) {
   return (dispatch, getState) => {
-    const url = `${config.api_url}api/users/delete/${id}`;
+    const url = `${config.api_url}api/buyers/delete/${id}`;
     const configs = {
       headers: attachTokenAxios(getState),
     };
     axios.delete(url, configs)
       .then(response => {
-        console.log('response :', response);
+        if (response.data.success) {
+          dispatch({
+            type: DELETE_USER_SUCCESS,
+            payload: id
+          })
+        } else dispatch({
+          type: DELETE_USER_FAILURE,
+          payload: {}
+        })
+      })
+  }
+}
+
+export function deleteFarmer(id) {
+  return (dispatch, getState) => {
+    const url = `${config.api_url}api/farmers/delete/${id}`;
+    const configs = {
+      headers: attachTokenAxios(getState),
+    };
+    axios.delete(url, configs)
+      .then(response => {
         if (response.data.success) {
           dispatch({
             type: DELETE_USER_SUCCESS,

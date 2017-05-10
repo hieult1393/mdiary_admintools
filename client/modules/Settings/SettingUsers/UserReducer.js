@@ -16,11 +16,7 @@ const initialState = { data: [] };
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_USER_DATA_SUCCESS:
-      return { ...state, data: get(action, 'payload', []) };
-    case GET_CURRENT_USER_DATA:
-      return { ...state, currentUserData: get(action, 'payload', {}) };
-    case GET_USER_TYPE :
-      return { ...state, userType: action.payload };
+      return { ...state, data: orderBy(get(action, 'payload', []), ['id'], ['desc']) };
     case CREATE_FARMER_SUCCESS:
       return {
         ...state,
@@ -44,7 +40,13 @@ const UserReducer = (state = initialState, action) => {
         deleteUserSuccess: true,
       };
     case DELETE_USER_FAILURE:
-      return { ...state, deleteUSerSuccess: false };
+      return { ...state, deleteUserSuccess: false };
+    case GET_CURRENT_USER_DATA:
+      return { ...state, currentUserData: get(action, 'payload', {}) };
+    case GET_USER_TYPE :
+      return { ...state, userType: action.payload };
+    case '@ReduxToastr/toastr/CLEAN':
+      return { ...state, createUserSuccess: null, updateUserSuccess: null, deleteUserSuccess: null };
     default:
       return state;
   }

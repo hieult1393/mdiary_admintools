@@ -10,10 +10,10 @@ export default class Color extends React.Component {
   }
 
   handleOnChange(color, fieldName, getCurrentColor) {
-    console.log('color:', color);
-    const { change } = this.props;
+    const { change, setShowColor } = this.props;
     change(fieldName, color.hex);
     getCurrentColor(color.hex);
+    setShowColor(false);
   }
 
   render() {

@@ -8,7 +8,7 @@ export const Toast = (createSuccess, updateSuccess, deleteSuccess) => {
   }
   if (createSuccess === false) {
     toastr.clean();
-    toastr.success('Notification', 'Created failure!');
+    toastr.warning('Notification', 'Created failure!');
   }
 
   if (updateSuccess) {
@@ -26,7 +26,7 @@ export const Toast = (createSuccess, updateSuccess, deleteSuccess) => {
   }
   if (deleteSuccess === false) {
     toastr.clean();
-    toastr.success('Notification', 'Delete failure!');
+    toastr.warning('Notification', 'Delete failure!');
   }
 };
 

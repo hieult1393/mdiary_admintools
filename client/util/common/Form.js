@@ -76,7 +76,6 @@ export const FieldEditor = (labelName, fieldName, props, descriptionValueCreated
 
 export const ColorInput = (props) => ({ input, placeholder, label, type, meta: { touched, error } }) => {
   const { setShowColor } = props;
-  console.log('props: ', props);
   return (
     <div className={`form-group ${touched && error ? 'has-error' : ''}`}>
       <label className='col-md-2 control-label' style={{ width: '35%' }}>{label}</label>
@@ -85,6 +84,7 @@ export const ColorInput = (props) => ({ input, placeholder, label, type, meta: {
                style={{ backgroundColor: input.value }}
                className='form-control input-medium'
                placeholder={placeholder}
+               onFocus={() => setShowColor(true)}
                type={type}/>
         <div className="help-block" style={{ width: '240px' }}>
           {touched && ((error && <span>{error}</span>))}
@@ -95,7 +95,7 @@ export const ColorInput = (props) => ({ input, placeholder, label, type, meta: {
 };
 
 export const FieldColor = (labelName, fieldName, validate, props, colorValueCreated) => {
-  const { showColor, setShowColor } = props;
+  const { showColor } = props;
   return (
     <div>
       <Field
@@ -103,8 +103,7 @@ export const FieldColor = (labelName, fieldName, validate, props, colorValueCrea
         name={fieldName}
         component={ColorInput(props)}
         validate={validate}
-        type='text'
-        onFocus={() => setShowColor(!showColor)}/>
+        type='text'/>
       {showColor ? <Color fieldName={fieldName} colorValueCreated={colorValueCreated} {...props}/> : null}
     </div>
   );

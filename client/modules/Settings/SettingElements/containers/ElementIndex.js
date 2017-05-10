@@ -44,10 +44,8 @@ const convertHtmlToString = (value) => (
 );
 
 const ElementIndex = (props) => {
-  const { elementsList, setCurrentElementId, currentElementId, setDeleting, deleting, deleteElement } = props;
-  const { createElementSuccess, updateElementSuccess, deleteElementSuccess, initDataForUpdateElementForm } = props;
+  const { elementsList, setCurrentElementId, currentElementId, setDeleting, deleting, deleteElement, initDataForUpdateElementForm } = props;
   const titleName = 'Elements';
-  Toast(createElementSuccess, updateElementSuccess, deleteElementSuccess);
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
@@ -56,9 +54,16 @@ const ElementIndex = (props) => {
       </HeaderPageContent>
       <Table tableHeaderList={tableHeaderList}>
         {elementsList.map((element, index) => (
-          <TableRow key={element.id}>
+          <TableRow key={index}>
             <TableColumn value={index + 1}/>
-            <TableColumn value={element.name} onClick={() => browserHistory.push(`/settingSeason/${element.id}`)}/>
+            <TableColumn
+              value={element.name}
+              onClick={() => {
+                if (parseInt(element.type_id) === 1)//dai ngay
+                  browserHistory.push(`/settingSeason/${element.id}`);
+                if (parseInt(element.type_id) === 2)//ngan ngay
+                  browserHistory.push(`/settingSeason/${element.id}/settingPhase/${season.id}`);
+              }}/>
             <TableColumn value={element.type_name}/>
             <TableColumn value={convertHtmlToString(element.description)}/>
             <TableColumn value={showImage(element)}/>
@@ -102,6 +107,10 @@ const EnhanceElementIndex = compose(
     componentDidMount(){
       const { fetchElementData } = this.props;
       fetchElementData();
+    },
+    componentWillReceiveProps(nextProps){
+      const { createElementSuccess, updateElementSuccess, deleteElementSuccess } = nextProps;
+      Toast(createElementSuccess, updateElementSuccess, deleteElementSuccess);
     }
   })
 )(ElementIndex);

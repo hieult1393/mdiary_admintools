@@ -39,7 +39,6 @@ export function createElement(data) {
     };
     axios.post(url, params, configs)
       .then(response => {
-        console.log('response: ', response);
         if (response.data.success) {
           dispatch({
             type: CREATE_ELEMENT_SUCCESS,

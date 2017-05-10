@@ -2,7 +2,7 @@ import PageContent, { HeaderPageContent, AddButton } from '../../../../util/comm
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton, AccountButton } from '../../../../util/common/Table';
 import { Toast } from '../../../../util/common/Toast';
 import Confirm from '../../../../util/common/Confirm';
-import { fetchUserData, getCurrentUserData, deleteUser } from '../UserAction';
+import { fetchUserData, getCurrentUserData, deleteBuyer, deleteFarmer } from '../UserAction';
 import {
   usersListSelector,
   createUserSuccessSelector,
@@ -16,11 +16,14 @@ import { browserHistory } from 'react-router';
 const tableHeaderList = [
   'STT', 'Name', 'Type', 'User Name', 'Options',
 ];
-const showConfirm = (userId, deleteUser, setDeleting) => {
+const showConfirm = (currentUser, deleteBuyer, deleteFarmer, setDeleting) => {
   return (
     <Confirm
       onConfirm={() => {
-        deleteUser(userId);
+        if (currentUser.type_id == 1)
+          deleteBuyer(currentUser.id);
+        if (currentUser.type_id == 2)
+          deleteFarmer(currentUser.id);
         setDeleting(false);
       }}
       onCancel={() => setDeleting(false)}/>
@@ -29,7 +32,7 @@ const showConfirm = (userId, deleteUser, setDeleting) => {
 
 const UserIndex = (props) => {
   let titleName = 'Setting users';
-  const { usersList, getCurrentUserData, setCurrentUserId, currentUserId, setDeleting, deleting, deleteUser } = props;
+  const { usersList, getCurrentUserData, setCurrentUser, currentUser, setDeleting, deleting, deleteBuyer, deleteFarmer } = props;
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
@@ -47,7 +50,7 @@ const UserIndex = (props) => {
               <div>
                 <UpdateButton/>
                 <DeleteButton onClick={() => {
-                  setCurrentUserId(user.id);
+                  setCurrentUser(user);
                   setDeleting(true);
                 }}/>
                 <AccountButton onClick={() => {
@@ -59,7 +62,7 @@ const UserIndex = (props) => {
           </TableRow>
         ))}
       </Table>
-      {deleting ? showConfirm(currentUserId, deleteUser, setDeleting) : null}
+      {deleting ? showConfirm(currentUser, deleteBuyer, deleteFarmer, setDeleting) : null}
     </PageContent>
   )
 };
@@ -72,12 +75,13 @@ const EnhanceUserIndex = compose(
     }),
     ({
       fetchUserData,
-      deleteUser,
+      deleteBuyer,
+      deleteFarmer,
       getCurrentUserData,
     })
   ),
   withState('deleting', 'setDeleting', false),
-  withState('currentUserId', 'setCurrentUserId', null),
+  withState('currentUser', 'setCurrentUser', null),
   lifecycle({
     componentDidMount(){
       const { fetchUserData } = this.props;
