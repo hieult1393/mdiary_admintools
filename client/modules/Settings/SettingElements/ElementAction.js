@@ -10,6 +10,7 @@ export const UPDATE_ELEMENT_FAILURE = 'UPDATE_ELEMENT_FAILURE';
 export const DELETE_ELEMENT_SUCCESS = 'DELETE_ELEMENT_SUCCESS';
 export const DELETE_ELEMENT_FAILURE = 'DELETE_ELEMENT_FAILURE';
 export const INIT_DATA_FOR_UPDATE_ELEMENT_FORM = 'INIT_DATA_FOR_UPDATE_ELEMENT_FORM';
+export const GET_CURRENT_COLOR = 'GET_CURRENT_COLOR';
 
 export function fetchElementData() {
   return (dispatch, getState) => {
@@ -100,6 +101,13 @@ export function initDataForUpdateElementForm(data) {
     type: INIT_DATA_FOR_UPDATE_ELEMENT_FORM,
     payload: data,
   };
+}
+
+export function getCurrentColor(colorValue) {
+  return {
+    type: GET_CURRENT_COLOR,
+    payload: colorValue,
+  }
 }
 
 

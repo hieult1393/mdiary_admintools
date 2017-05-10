@@ -2,6 +2,8 @@ import React from 'react';
 import { Field } from 'redux-form';
 import UploadImage from './UploadImage';
 import Editor from './Editor';
+import Color from './Color';
+import EnhanceDatePicker from './EnhanceDatePicker';
 
 export const Input = ({ input, placeholder, label, type, meta: { touched, error } }) => (
   <div className={`form-group ${touched && error ? 'has-error' : ''}`}>
@@ -71,6 +73,58 @@ export const FieldEditor = (labelName, fieldName, props, descriptionValueCreated
     </div>
   </div>
 );
+
+export const ColorInput = (props) => ({ input, placeholder, label, type, meta: { touched, error } }) => {
+  const { setShowColor } = props;
+  console.log('props: ', props);
+  return (
+    <div className={`form-group ${touched && error ? 'has-error' : ''}`}>
+      <label className='col-md-2 control-label' style={{ width: '35%' }}>{label}</label>
+      <div className='col-md-3'>
+        <input {...input}
+               style={{ backgroundColor: input.value }}
+               className='form-control input-medium'
+               placeholder={placeholder}
+               type={type}/>
+        <div className="help-block" style={{ width: '240px' }}>
+          {touched && ((error && <span>{error}</span>))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const FieldColor = (labelName, fieldName, validate, props, colorValueCreated) => {
+  const { showColor, setShowColor } = props;
+  return (
+    <div>
+      <Field
+        label={labelName}
+        name={fieldName}
+        component={ColorInput(props)}
+        validate={validate}
+        type='text'
+        onFocus={() => setShowColor(!showColor)}/>
+      {showColor ? <Color fieldName={fieldName} colorValueCreated={colorValueCreated} {...props}/> : null}
+    </div>
+  );
+};
+
+export const FieldDatePicker = (labelName, fieldName, props, dateValueCreated) => {
+  const { errorDatePicker } = props;
+  return (
+    <div className={`form-group ${errorDatePicker ? 'has-error' : ''}`}>
+      <label className='col-md-2 control-label' style={{ width: '35%' }}>{labelName}</label>
+      <Field name={fieldName} type='text' component='hidden'/>
+      <div className='col-md-6' style={{ width: '270px' }}>
+        <EnhanceDatePicker fieldName={fieldName} dateValueCreated={dateValueCreated} {...props}/>
+        <div className="help-block" style={{ width: '240px' }}>
+          {<span>{errorDatePicker}</span>}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export class FormRow extends React.Component {
   render() {
