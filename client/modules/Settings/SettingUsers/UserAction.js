@@ -91,6 +91,7 @@ export function deleteUser(id) {
     };
     axios.delete(url, configs)
       .then(response => {
+        console.log('response :', response);
         if (response.data.success) {
           dispatch({
             type: DELETE_USER_SUCCESS,

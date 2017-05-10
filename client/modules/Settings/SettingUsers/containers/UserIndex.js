@@ -1,20 +1,35 @@
 import PageContent, { HeaderPageContent, AddButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton, AccountButton } from '../../../../util/common/Table';
 import { Toast } from '../../../../util/common/Toast';
-import { fetchUserData, getCurrentUserData } from '../UserAction';
-import { usersListSelector, createUserSuccessSelector } from '../UserReducer';
+import Confirm from '../../../../util/common/Confirm';
+import { fetchUserData, getCurrentUserData, deleteUser } from '../UserAction';
+import {
+  usersListSelector,
+  createUserSuccessSelector,
+  deleteUserSuccessSelector,
+} from '../UserReducer';
 import React from 'react';
-import { compose, lifecycle } from 'recompose';
+import { compose, withState, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 const tableHeaderList = [
   'STT', 'Name', 'Type', 'User Name', 'Options',
 ];
+const showConfirm = (userId, deleteUser, setDeleting) => {
+  return (
+    <Confirm
+      onConfirm={() => {
+        deleteUser(userId);
+        setDeleting(false);
+      }}
+      onCancel={() => setDeleting(false)}/>
+  );
+};
 
 const UserIndex = (props) => {
   let titleName = 'Setting users';
-  const { usersList, getCurrentUserData } = props;
+  const { usersList, getCurrentUserData, setCurrentUserId, currentUserId, setDeleting, deleting, deleteUser } = props;
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
@@ -31,7 +46,10 @@ const UserIndex = (props) => {
             <TableColumn value={
               <div>
                 <UpdateButton/>
-                <DeleteButton/>
+                <DeleteButton onClick={() => {
+                  setCurrentUserId(user.id);
+                  setDeleting(true);
+                }}/>
                 <AccountButton onClick={() => {
                   getCurrentUserData(user);
                   browserHistory.push(`/settingAccount`);
@@ -41,28 +59,33 @@ const UserIndex = (props) => {
           </TableRow>
         ))}
       </Table>
+      {deleting ? showConfirm(currentUserId, deleteUser, setDeleting) : null}
     </PageContent>
-  );
+  )
 };
 const EnhanceUserIndex = compose(
   connect(
     state => ({
       usersList: usersListSelector(state),
       createUserSuccess: createUserSuccessSelector(state),
+      deleteUserSuccess: deleteUserSuccessSelector(state),
     }),
     ({
       fetchUserData,
+      deleteUser,
       getCurrentUserData,
     })
   ),
+  withState('deleting', 'setDeleting', false),
+  withState('currentUserId', 'setCurrentUserId', null),
   lifecycle({
     componentDidMount(){
       const { fetchUserData } = this.props;
       fetchUserData();
     },
     componentWillReceiveProps(nextProps){
-      const { createUserSuccess } = nextProps;
-      Toast(createUserSuccess);
+      const { createUserSuccess, deleteUserSuccess } = nextProps;
+      Toast(createUserSuccess, null, deleteUserSuccess);
     }
   })
 )(UserIndex);

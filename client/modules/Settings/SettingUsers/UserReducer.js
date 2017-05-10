@@ -37,6 +37,14 @@ const UserReducer = (state = initialState, action) => {
       };
     case CREATE_BUYER_FAILURE:
       return { ...state, createUserSuccess: false };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        data: [...state.data.filter(user => user.id !== action.payload)],
+        deleteUserSuccess: true,
+      };
+    case DELETE_USER_FAILURE:
+      return { ...state, deleteUSerSuccess: false };
     default:
       return state;
   }
@@ -45,4 +53,5 @@ export const usersListSelector = state => state.UserReducer.data;
 export const currentUserDataSelector = state => state.UserReducer.currentUserData;
 export const userTypeSelector = state => state.UserReducer.userType;
 export const createUserSuccessSelector = state => state.UserReducer.createUserSuccess;
+export const deleteUserSuccessSelector = state => state.UserReducer.deleteUserSuccess;
 export default UserReducer;
