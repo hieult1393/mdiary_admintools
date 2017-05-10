@@ -36,15 +36,15 @@ export const BuyerForm = (props) => {
       browserHistory.goBack();
     })}>
       <FormRow>
-        <FormColumn style={{ marginLeft: '5%' }}>
+        <div className="col-md-4">
           {FieldInput('Name *', 'name', Input, [requiredForInput, maxLength(20)], 'text', 'Input name')}
           {FieldSelect('Gender *', 'gender', Select, gendersList, requiredForSelect, optionDefault())}
           {FieldInput('Address *', 'address', Input, [requiredForInput], 'text', 'Input address')}
-        </FormColumn>
-        <FormColumn>
+        </div>
+        <div className="col-md-4">
           {FieldInput('PhoneNo *', 'phone', Input, [requiredForInput], 'number', 'Input phoneNo')}
           {FieldDatePicker('BirthDay *', 'birthday', props)}
-        </FormColumn>
+        </div>
       </FormRow>
       <FormRow>
         <div style={{ float: 'right', marginRight: '3%' }}>

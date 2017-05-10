@@ -61,7 +61,7 @@ const ElementIndex = (props) => {
               onClick={() => {
                 if (parseInt(element.type_id) === 1)//dai ngay
                   browserHistory.push(`/settingSeason/${element.id}`);
-                if (parseInt(element.type_id) === 2)//ngan ngay
+                if (parseInt(element.type_id) === 2)//ngan ngày
                   browserHistory.push(`/settingSeason/${element.id}/settingPhase/${season.id}`);
               }}/>
             <TableColumn value={element.type_name}/>

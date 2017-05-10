@@ -7,9 +7,9 @@ export const UserTypeSelect = (data, props) => {
       <form className='form-horizontal'
             style={{ borderBottomStyle: 'solid', borderWidth: '1px', borderColor: '#6aee0f' }}>
         <div className='row'>
-          <div className="col-md-5" style={{ marginLeft: '11%' }}>
+          <div className="col-md-4">
             <div className='form-group'>
-              <label className='col-md-2 control-label' style={{ width: '20%' }}>User Type</label>
+              <label className='col-md-2 control-label' style={{ width: '35%' }}>User Type</label>
               <div className='col-md-3'>
                 <select className='form-control input-medium'
                         onChange={e => getUserType(e.target.value)}>
