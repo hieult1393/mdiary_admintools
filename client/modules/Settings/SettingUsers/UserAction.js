@@ -7,6 +7,8 @@ export const CREATE_FARMER_SUCCESS = 'CREATE_FARMER_SUCCESS';
 export const CREATE_FARMER_FAILURE = 'CREATE_FARMER_FAILURE';
 export const CREATE_BUYER_SUCCESS = 'CREATE_BUYER_SUCCESS';
 export const CREATE_BUYER_FAILURE = 'CREATE_BUYER_FAILURE';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
 export const INIT_DATA_FOR_UPDATE_USER_FORM = 'INIT_DATA_FOR_UPDATE_USER_FORM';
@@ -82,6 +84,50 @@ export function createBuyer(data) {
   }
 }
 
+export function updateBuyer(id, data) {
+  return (dispatch, getState) => {
+    const url = `${config.api_url}api/buyers/update/${id}`;
+    const params = data;
+    const configs = {
+      headers: attachTokenAxios(getState),
+    };
+    axios.put(url, params, configs)
+      .then(response => {
+        if (response.data.success) {
+          dispatch({
+            type: UPDATE_USER_SUCCESS,
+            payload: response.data.payload
+          })
+        }
+        else dispatch({
+          type: UPDATE_USER_FAILURE,
+          payload: {}
+        })
+      })
+  }
+}
+export function updateFarmer(id, data) {
+  return (dispatch, getState) => {
+    const url = `${config.api_url}api/farmers/update/${id}`;
+    const params = data;
+    const configs = {
+      headers: attachTokenAxios(getState),
+    };
+    axios.put(url, params, configs)
+      .then(response => {
+        if (response.data.success) {
+          dispatch({
+            type: UPDATE_USER_SUCCESS,
+            payload: response.data.payload
+          })
+        }
+        else dispatch({
+          type: UPDATE_USER_FAILURE,
+          payload: {}
+        })
+      })
+  }
+}
 export function deleteBuyer(id) {
   return (dispatch, getState) => {
     const url = `${config.api_url}api/buyers/delete/${id}`;
@@ -124,7 +170,14 @@ export function deleteFarmer(id) {
   }
 }
 
-export function initDataForUpdateUserForm(data) {
+export function initDataForUpdateBuyerForm(data) {
+  return {
+    type: INIT_DATA_FOR_UPDATE_USER_FORM,
+    payload: data,
+  };
+}
+
+export function initDataForUpdateFarmerForm(data) {
   return {
     type: INIT_DATA_FOR_UPDATE_USER_FORM,
     payload: data,

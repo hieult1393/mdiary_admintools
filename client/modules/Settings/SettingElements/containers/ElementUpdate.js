@@ -1,6 +1,11 @@
 import PageContent, { HeaderPageContent } from '../../../../util/common/PageContent';
 import { Form, FormRow, FormColumn, CancelButton, SaveButton } from '../../../../util/common/Form';
-import { FieldImage, Input, FieldInput, Select, FieldSelect, FieldEditor } from '../../../../util/common/Form';
+import { FieldImage,
+  Input,
+  FieldInput,
+  Select,
+  FieldSelect,
+  FieldEditor } from '../../../../util/common/Form';
 import { updateElement } from '../ElementAction';
 import { initDataForUpdateElementFormSelector } from '../ElementReducer';
 import React from 'react';

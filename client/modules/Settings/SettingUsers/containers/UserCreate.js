@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { compose, withState } from 'recompose';
 import { reduxForm } from 'redux-form';
-import { BuyerForm } from '../components/BuyerForm';
-import { FarmerForm } from '../components/FarmerForm';
+import { BuyerForm } from '../components/BuyerCreateForm';
+import { FarmerForm } from '../components/FarmerCreateForm';
 import { UserTypeSelect } from '../components/UserTypeSelect';
 
 const requiredForInput = value => value ? undefined : 'Vui lòng không để trống!';

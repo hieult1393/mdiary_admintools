@@ -2,10 +2,18 @@ import PageContent, { HeaderPageContent, AddButton } from '../../../../util/comm
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton, AccountButton } from '../../../../util/common/Table';
 import { Toast } from '../../../../util/common/Toast';
 import Confirm from '../../../../util/common/Confirm';
-import { fetchUserData, getCurrentUserData, deleteBuyer, deleteFarmer } from '../UserAction';
+import {
+  fetchUserData,
+  getCurrentUserData,
+  deleteBuyer,
+  deleteFarmer,
+  initDataForUpdateBuyerForm,
+  initDataForUpdateFarmerForm,
+} from '../UserAction';
 import {
   usersListSelector,
   createUserSuccessSelector,
+  updateUserSuccessSelector,
   deleteUserSuccessSelector,
 } from '../UserReducer';
 import React from 'react';
@@ -32,7 +40,11 @@ const showConfirm = (currentUser, deleteBuyer, deleteFarmer, setDeleting) => {
 
 const UserIndex = (props) => {
   let titleName = 'Setting users';
-  const { usersList, getCurrentUserData, setCurrentUser, currentUser, setDeleting, deleting, deleteBuyer, deleteFarmer } = props;
+  const {
+    usersList, getCurrentUserData, setCurrentUser, currentUser,
+    setDeleting, deleting, deleteBuyer, deleteFarmer,
+    initDataForUpdateBuyerForm, initDataForUpdateFarmerForm, getUserType
+  } = props;
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
@@ -48,7 +60,13 @@ const UserIndex = (props) => {
             <TableColumn value={user.username}/>
             <TableColumn value={
               <div>
-                <UpdateButton/>
+                <UpdateButton onClick={() => {
+                  if (user.type_id == 1)
+                    initDataForUpdateBuyerForm(user);
+                  if (user.type_id == 2)
+                    initDataForUpdateFarmerForm(user);
+                  browserHistory.push(`/settingUser/update`);
+                }}/>
                 <DeleteButton onClick={() => {
                   setCurrentUser(user);
                   setDeleting(true);
@@ -71,13 +89,16 @@ const EnhanceUserIndex = compose(
     state => ({
       usersList: usersListSelector(state),
       createUserSuccess: createUserSuccessSelector(state),
+      updateUserSuccess: updateUserSuccessSelector(state),
       deleteUserSuccess: deleteUserSuccessSelector(state),
     }),
     ({
       fetchUserData,
+      getCurrentUserData,
+      initDataForUpdateBuyerForm,
+      initDataForUpdateFarmerForm,
       deleteBuyer,
       deleteFarmer,
-      getCurrentUserData,
     })
   ),
   withState('deleting', 'setDeleting', false),
@@ -88,8 +109,8 @@ const EnhanceUserIndex = compose(
       fetchUserData();
     },
     componentWillReceiveProps(nextProps){
-      const { createUserSuccess, deleteUserSuccess } = nextProps;
-      Toast(createUserSuccess, null, deleteUserSuccess);
+      const { createUserSuccess, updateUserSuccess, deleteUserSuccess } = nextProps;
+      Toast(createUserSuccess, updateUserSuccess, deleteUserSuccess);
     }
   })
 )(UserIndex);

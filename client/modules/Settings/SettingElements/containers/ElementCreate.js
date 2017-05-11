@@ -63,7 +63,6 @@ const ElementCreate = (props) => {
     </PageContent>
   )
 };
-
 const EnhanceElementCreate = compose(
   connect(
     state => ({
