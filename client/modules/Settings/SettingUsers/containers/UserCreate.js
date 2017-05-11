@@ -10,10 +10,6 @@ import { reduxForm } from 'redux-form';
 import { BuyerForm } from '../components/BuyerCreateForm';
 import { FarmerForm } from '../components/FarmerCreateForm';
 import { UserTypeSelect } from '../components/UserTypeSelect';
-
-const requiredForInput = value => value ? undefined : 'Vui lòng không để trống!';
-const maxLength = max => value => value && value.length > max ? `Vui lòng nhập dưới ${max} kí tự!` : undefined;
-const optionDefault = () => (<option value='' key={0}>Choose type name</option>);
 const typeNameList = [{ id: 1, name: 'Buyer' }, { id: 2, name: 'Farmer' }];
 
 const showForm = (userType, props) => {

@@ -9,20 +9,19 @@ export default class Color extends React.Component {
     }
   }
 
-  handleOnChange(color, fieldName, getCurrentColor) {
+  handleOnChange(color, fieldName) {
     const { change, setShowColor } = this.props;
     change(fieldName, color.hex);
-    getCurrentColor(color.hex);
     setShowColor(false);
   }
 
   render() {
-    const { fieldName, getCurrentColor } = this.props;
+    const { fieldName } = this.props;
     return (
       <div className='form-group' style={{ marginLeft: '33%' }}>
         <div className='col-md-3'>
           <TwitterPicker
-            onChange={color => this.handleOnChange(color, fieldName, getCurrentColor)}/>
+            onChange={color => this.handleOnChange(color, fieldName)}/>
         </div>
       </div>
     );

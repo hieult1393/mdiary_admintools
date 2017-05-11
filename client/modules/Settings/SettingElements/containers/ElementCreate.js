@@ -9,8 +9,7 @@ import {
   FieldEditor,
   FieldColor,
 } from '../../../../util/common/Form';
-import { createElement, getCurrentColor } from '../ElementAction';
-import { colorValueSelector } from '../ElementReducer';
+import { createElement } from '../ElementAction';
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -43,7 +42,7 @@ const ElementCreate = (props) => {
             {FieldInput('Element Name *', 'name', Input, [requiredForInput, maxLength(20)], 'text', 'Input element name')}
             {FieldInput('Year begin harvest *', 'year_begin_harvest', Input, [requiredForInput, minValue(0)], 'number', 'Input year begin harvest')}
             {FieldSelect('Type name *', 'type_id', Select, typeNameList, requiredForSelect, optionDefault())}
-            {FieldColor('Color *', 'color', null, props)}
+            {FieldColor('Color *', 'color', requiredForInput, props)}
           </FormColumn>
           <FormColumn>
             {FieldImage('Image', 'images', props)}
@@ -63,14 +62,12 @@ const ElementCreate = (props) => {
     </PageContent>
   )
 };
+
 const EnhanceElementCreate = compose(
   connect(
-    state => ({
-      colorValue: colorValueSelector(state),
-    }),
+    state => ({}),
     ({
       createElement,
-      getCurrentColor,
     })
   ),
   withState('showColor', 'setShowColor', false),

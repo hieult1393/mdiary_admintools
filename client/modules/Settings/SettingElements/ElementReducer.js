@@ -7,7 +7,6 @@ import {
   DELETE_ELEMENT_SUCCESS,
   DELETE_ELEMENT_FAILURE,
   INIT_DATA_FOR_UPDATE_ELEMENT_FORM,
-  GET_CURRENT_COLOR,
 } from './ElementAction';
 
 import { get, compact, orderBy, findIndex } from 'lodash';
@@ -42,8 +41,6 @@ const ElementReducer = (state = initialState, action) => {
       return { ...state, deleteElementSuccess: false };
     case INIT_DATA_FOR_UPDATE_ELEMENT_FORM:
       return { ...state, initDataForUpdateElementForm: get(action, 'payload', {}) };
-    case GET_CURRENT_COLOR:
-      return { ...state, colorValue: action.payload };
     case '@ReduxToastr/toastr/CLEAN':
       return { ...state, createElementSuccess: null, updateElementSuccess: null, deleteElementSuccess: null };
     default:
@@ -55,5 +52,4 @@ export const createElementSuccessSelector = state => state.ElementReducer.create
 export const updateElementSuccessSelector = state => state.ElementReducer.updateElementSuccess;
 export const deleteElementSuccessSelector = state => state.ElementReducer.deleteElementSuccess;
 export const initDataForUpdateElementFormSelector = state => state.ElementReducer.initDataForUpdateElementForm;
-export const colorValueSelector = state => state.ElementReducer.colorValue;
 export default ElementReducer;

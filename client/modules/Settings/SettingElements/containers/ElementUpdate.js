@@ -1,11 +1,14 @@
 import PageContent, { HeaderPageContent } from '../../../../util/common/PageContent';
 import { Form, FormRow, FormColumn, CancelButton, SaveButton } from '../../../../util/common/Form';
-import { FieldImage,
+import {
+  FieldImage,
   Input,
   FieldInput,
   Select,
   FieldSelect,
-  FieldEditor } from '../../../../util/common/Form';
+  FieldEditor,
+  FieldColor,
+} from '../../../../util/common/Form';
 import { updateElement } from '../ElementAction';
 import { initDataForUpdateElementFormSelector } from '../ElementReducer';
 import React from 'react';
@@ -13,7 +16,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { isEmpty, find } from 'lodash';
-import { compose } from 'recompose';
+import { compose, withState } from 'recompose';
 
 const requiredForInput = value => value ? undefined : 'Vui lòng không để trống!';
 const minValue = min => value => value && value <= min ? `Giá trị cần nhập phải lớn hơn 0!` : undefined;
@@ -30,7 +33,7 @@ const ElementUpdate = (props) => {
         values.type_name = find(typeNameList, { id: parseInt(values.type_id) }).name;
         values.images = values.images ? values.images : null;
         values.description = values.description ? values.description : null;
-        updateElement(initData.id, values);
+        updateElement(values.id, values);
         browserHistory.goBack();
       })}>
         <FormRow>
@@ -38,6 +41,7 @@ const ElementUpdate = (props) => {
             {FieldInput('Element Name *', 'name', Input, [requiredForInput, maxLength(20)], 'text', 'Input element name')}
             {FieldInput('Year begin harvest *', 'year_begin_harvest', Input, [requiredForInput, minValue(0)], 'number', 'Input year begin harvest')}
             {FieldSelect('Type name *', 'type_id', Select, typeNameList)}
+            {FieldColor('Color *', 'color', requiredForInput, props, initData.color)}
           </FormColumn>
           <FormColumn>
             {FieldImage('Image', 'images', props, initData.images)}
@@ -68,9 +72,12 @@ const EnhanceElementUpdate = compose(
       updateElement,
     })
   ),
+  withState('showColor', 'setShowColor', false),
   reduxForm({
     form: 'elementUpdate',
   })
 )(ElementUpdate);
 
 export default EnhanceElementUpdate;
+
+

@@ -4,9 +4,10 @@ import App from './modules/App/App';
 import Login from './modules/Login/containers/Login';
 import UserIndex from './modules/Settings/SettingUsers/containers/UserIndex';
 import UserCreate from './modules/Settings/SettingUsers/containers/UserCreate';
+import UserUpdate from './modules/Settings/SettingUsers/containers/UserUpdate';
 import AccountIndex from './modules/Settings/SettingAccounts/containers/AccountIndex';
 import AccountCreate from './modules/Settings/SettingAccounts/containers/AccountCreate';
-import UserUpdate from './modules/Settings/SettingUsers/containers/UserUpdate';
+import AccountUpdate from './modules/Settings/SettingAccounts/containers/AccountUpdate';
 import ElementIndex from './modules/Settings/SettingElements/containers/ElementIndex';
 import ElementCreate from './modules/Settings/SettingElements/containers/ElementCreate';
 import ElementUpdate from './modules/Settings/SettingElements/containers/ElementUpdate';
@@ -28,9 +29,10 @@ export default (
     <IndexRoute component={Login}/>
     <Route path="/settingUser" component={UserIndex}/>
     <Route path="/settingUser/create" component={UserCreate}/>
+    <Route path="/settingUser/update" component={UserUpdate}/>
     <Route path="/settingAccount" component={AccountIndex}/>
     <Route path="/settingAccount/create" component={AccountCreate}/>
-    <Route path="/settingUser/update" component={UserUpdate}/>
+    <Route path="/settingAccount/update" component={AccountUpdate}/>
     <Route path="/settingElement" component={ElementIndex}/>
     <Route path="/settingElement/create" component={ElementCreate}/>
     <Route path="/settingElement/update" component={ElementUpdate}/>
@@ -42,3 +44,5 @@ export default (
     <Route path="/settingSeason/:elementId/settingPhase/:seasonId/update" component={PhasesUpdate}/>
   </Route>
 );
+
+

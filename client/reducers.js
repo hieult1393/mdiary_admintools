@@ -7,6 +7,7 @@ import { routerReducer } from 'react-router-redux';
 import LoginReducer from './modules/Login/LoginReducer';
 import AppReducer from './modules/App/AppReducer';
 import UserReducer from './modules/Settings/SettingUsers/UserReducer';
+import AccountReducer from './modules/Settings/SettingAccounts/AccountReducer';
 import ElementReducer from './modules/Settings/SettingElements/ElementReducer';
 import SeasonReducer from './modules/Settings/SettingSeasons/SeasonReducer';
 import PhaseReducer from './modules/Settings/SettingPhases/PhaseReducer';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   LoginReducer,
   AppReducer,
   UserReducer,
+  AccountReducer,
   ElementReducer,
   SeasonReducer,
   PhaseReducer,

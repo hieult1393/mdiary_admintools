@@ -1,6 +1,6 @@
 import React from 'react';
 import DatePicker from 'react-bootstrap-date-picker';
-import {  getDateTimeValue } from '../helper/dateTime';
+import { getDateTimeValue } from '../helper/dateTime';
 import moment from 'moment';
 
 export default class EnhanceDatePicker extends React.Component {
@@ -10,7 +10,7 @@ export default class EnhanceDatePicker extends React.Component {
       dateValue: this.props.dateValueCreated ? this.props.dateValueCreated : null,
     }
   }
-  
+
   handleChangeDatePicker(e, fieldName) {
     const { change, setErrorDatePicker } = this.props;
     this.setState({ dateValue: getDateTimeValue(e) });
@@ -18,7 +18,7 @@ export default class EnhanceDatePicker extends React.Component {
     if (moment() - moment(getDateTimeValue(e)) < 18)
       setErrorDatePicker('Vui lòng kiểm tra lại năm sinh!');
   }
-  
+
   render() {
     const { fieldName } = this.props;
     return (

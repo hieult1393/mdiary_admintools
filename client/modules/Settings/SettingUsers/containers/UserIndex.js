@@ -10,6 +10,7 @@ import {
   initDataForUpdateBuyerForm,
   initDataForUpdateFarmerForm,
 } from '../UserAction';
+import { formatDate } from '../../../../util/helper/dateTime';
 import {
   usersListSelector,
   createUserSuccessSelector,
@@ -21,9 +22,12 @@ import { compose, withState, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
-const tableHeaderList = [
-  'STT', 'Name', 'Type', 'User Name', 'Options',
-];
+const showTypeName = (typeId) => {
+  if (typeId === 1)
+    return 'Buyer';
+  return 'Farmer';
+};
+
 const showConfirm = (currentUser, deleteBuyer, deleteFarmer, setDeleting) => {
   return (
     <Confirm
@@ -41,10 +45,12 @@ const showConfirm = (currentUser, deleteBuyer, deleteFarmer, setDeleting) => {
 const UserIndex = (props) => {
   let titleName = 'Setting users';
   const {
-    usersList, getCurrentUserData, setCurrentUser, currentUser,
-    setDeleting, deleting, deleteBuyer, deleteFarmer,
-    initDataForUpdateBuyerForm, initDataForUpdateFarmerForm, getUserType
+    usersList, getCurrentUserData, setCurrentUser, currentUser, setDeleting, deleting, deleteBuyer, deleteFarmer,
+    initDataForUpdateBuyerForm, initDataForUpdateFarmerForm,
   } = props;
+  const tableHeaderList = [
+    'STT', 'Name', 'Type Name', 'Birthday', 'Phone', 'Address', 'Options',
+  ];
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
@@ -56,8 +62,10 @@ const UserIndex = (props) => {
           <TableRow key={index}>
             <TableColumn value={index + 1}/>
             <TableColumn value={user.name}/>
-            <TableColumn value={user.type_id}/>
-            <TableColumn value={user.username}/>
+            <TableColumn value={showTypeName(user.type_id)}/>
+            <TableColumn value={formatDate(user.birthday)}/>
+            <TableColumn value={user.phone}/>
+            <TableColumn value={user.address}/>
             <TableColumn value={
               <div>
                 <UpdateButton onClick={() => {
@@ -115,4 +123,6 @@ const EnhanceUserIndex = compose(
   })
 )(UserIndex);
 export default EnhanceUserIndex;
+
+
 
