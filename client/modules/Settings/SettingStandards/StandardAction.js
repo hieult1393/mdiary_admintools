@@ -2,18 +2,18 @@ import axios from 'axios';
 import { attachTokenAxios } from '../../../util/setAuthorizationToken';
 import config from '../../../../configs/config';
 
-export const FETCH_FERTILIZER_DATA_SUCCESS = 'FETCH_FERTILIZER_DATA_SUCCESS';
-export const CREATE_FERTILIZER_SUCCESS = 'CREATE_FERTILIZER_SUCCESS';
-export const CREATE_FERTILIZER_FAILURE = 'CREATE_FERTILIZER_FAILURE';
-export const UPDATE_FERTILIZER_SUCCESS = 'UPDATE_FERTILIZER_SUCCESS';
-export const UPDATE_FERTILIZER_FAILURE = 'UPDATE_FERTILIZER_FAILURE';
-export const DELETE_FERTILIZER_SUCCESS = 'DELETE_FERTILIZER_SUCCESS';
-export const DELETE_FERTILIZER_FAILURE = 'DELETE_FERTILIZER_FAILURE';
-export const INIT_DATA_FOR_UPDATE_FERTILIZER_FORM = 'INIT_DATA_FOR_UPDATE_FERTILIZER_FORM';
+export const FETCH_STANDARD_DATA_SUCCESS = 'FETCH_STANDARD_DATA_SUCCESS';
+export const CREATE_STANDARD_SUCCESS = 'CREATE_STANDARD_SUCCESS';
+export const CREATE_STANDARD_FAILURE = 'CREATE_STANDARD_FAILURE';
+export const UPDATE_STANDARD_SUCCESS = 'UPDATE_STANDARD_SUCCESS';
+export const UPDATE_STANDARD_FAILURE = 'UPDATE_STANDARD_FAILURE';
+export const DELETE_STANDARD_SUCCESS = 'DELETE_STANDARD_SUCCESS';
+export const DELETE_STANDARD_FAILURE = 'DELETE_STANDARD_FAILURE';
+export const INIT_DATA_FOR_UPDATE_STANDARD_FORM = 'INIT_DATA_FOR_UPDATE_STANDARD_FORM';
 
-export function fetchFertilizerData() {
+export function fetchStandardData() {
   return (dispatch, getState) => {
-    const url = `${config.api_url}api/fertilizers/getAll`;
+    const url = `${config.api_url}api/standards/getAll`;
     const configs = {
       headers: attachTokenAxios(getState),
     };
@@ -21,7 +21,7 @@ export function fetchFertilizerData() {
       .then(response => {
         if (response.data.success) {
           dispatch({
-            type: FETCH_FERTILIZER_DATA_SUCCESS,
+            type: FETCH_STANDARD_DATA_SUCCESS,
             payload: response.data.payload
           })
         }
@@ -29,9 +29,9 @@ export function fetchFertilizerData() {
   }
 }
 
-export function createFertilizer(data) {
+export function createStandard(data) {
   return (dispatch, getState) => {
-    const url = `${config.api_url}api/fertilizers/create`;
+    const url = `${config.api_url}api/standards/create`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -40,20 +40,20 @@ export function createFertilizer(data) {
       .then(response => {
         if (response.data.success) {
           dispatch({
-            type: CREATE_FERTILIZER_SUCCESS,
+            type: CREATE_STANDARD_SUCCESS,
             payload: response.data.payload
           })
         } else dispatch({
-          type: CREATE_FERTILIZER_FAILURE,
+          type: CREATE_STANDARD_FAILURE,
           payload: {}
         })
       })
   }
 }
 
-export function updateFertilizer(id, data) {
+export function updateStandard(id, data) {
   return (dispatch, getState) => {
-    const url = `${config.api_url}api/fertilizers/update/${id}`;
+    const url = `${config.api_url}api/standards/update/${id}`;
     const params = data;
     const configs = {
       headers: attachTokenAxios(getState),
@@ -62,20 +62,20 @@ export function updateFertilizer(id, data) {
       .then(response => {
         if (response.data.success) {
           dispatch({
-            type: UPDATE_FERTILIZER_SUCCESS,
+            type: UPDATE_STANDARD_SUCCESS,
             payload: response.data.payload
           })
         } else dispatch({
-          type: UPDATE_FERTILIZER_FAILURE,
+          type: UPDATE_STANDARD_FAILURE,
           payload: {}
         })
       })
   }
 }
 
-export function deleteFertilizer(id) {
+export function deleteStandard(id) {
   return (dispatch, getState) => {
-    const url = `${config.api_url}api/fertilizers/delete/${id}`;
+    const url = `${config.api_url}api/standards/delete/${id}`;
     const configs = {
       headers: attachTokenAxios(getState),
     };
@@ -83,20 +83,20 @@ export function deleteFertilizer(id) {
       .then(response => {
         if (response.data.success) {
           dispatch({
-            type: DELETE_FERTILIZER_SUCCESS,
+            type: DELETE_STANDARD_SUCCESS,
             payload: id
           })
         } else dispatch({
-          type: DELETE_FERTILIZER_FAILURE,
+          type: DELETE_STANDARD_FAILURE,
           payload: {}
         })
       })
   }
 }
 
-export function initDataForUpdateFertilizerForm(data) {
+export function initDataForUpdateStandardForm(data) {
   return {
-    type: INIT_DATA_FOR_UPDATE_FERTILIZER_FORM,
+    type: INIT_DATA_FOR_UPDATE_STANDARD_FORM,
     payload: data,
   };
 }

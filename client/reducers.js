@@ -11,6 +11,9 @@ import AccountReducer from './modules/Settings/SettingAccounts/AccountReducer';
 import ElementReducer from './modules/Settings/SettingElements/ElementReducer';
 import SeasonReducer from './modules/Settings/SettingSeasons/SeasonReducer';
 import PhaseReducer from './modules/Settings/SettingPhases/PhaseReducer';
+import StandardReducer from './modules/Settings/SettingStandards/StandardReducer';
+import PesticideReducer from './modules/Settings/SettingPesticides/PesticideReducer';
+import FertilizerReducer from './modules/Settings/SettingFertilizers/FertilizerReducer';
 
 const rootReducer = combineReducers({
   LoginReducer,
@@ -20,6 +23,9 @@ const rootReducer = combineReducers({
   ElementReducer,
   SeasonReducer,
   PhaseReducer,
+  StandardReducer,
+  PesticideReducer,
+  FertilizerReducer,
   routing: routerReducer,
   form: formReducer,
   toastr: toastrReducer,

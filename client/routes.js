@@ -17,6 +17,15 @@ import SeasonUpdate from './modules/Settings/SettingSeasons/containers/SeasonUpd
 import PhaseIndex from './modules/Settings/SettingPhases/containers/PhaseIndex';
 import PhaseCreate from './modules/Settings/SettingPhases/containers/PhaseCreate';
 import PhasesUpdate from './modules/Settings/SettingPhases/containers/PhasesUpdate';
+import StandardIndex from './modules/Settings/SettingStandards/containers/StandardIndex';
+import StandardCreate from './modules/Settings/SettingStandards/containers/StandardCreate';
+import StandardUpdate from './modules/Settings/SettingStandards/containers/StandardUpdate';
+import PesticideIndex from './modules/Settings/SettingPesticides/containers/PesticideIndex';
+import PesticideCreate from './modules/Settings/SettingPesticides/containers/PesticideCreate';
+import PesticideUpdate from './modules/Settings/SettingPesticides/containers/PesticideUpdate';
+import FertilizerIndex from './modules/Settings/SettingFertilizers/containers/FertilizerIndex';
+import FertilizerCreate from './modules/Settings/SettingFertilizers/containers/FertilizerCreate';
+import FertilizerUpdate from './modules/Settings/SettingFertilizers/containers/FertilizerUpdate';
 
 if (typeof require.ensure !== 'function') {
   require.ensure = function requireModule(deps, callback) {
@@ -42,6 +51,16 @@ export default (
     <Route path="/settingSeason/:elementId/settingPhase/:seasonId" component={PhaseIndex}/>
     <Route path="/settingSeason/:elementId/settingPhase/:seasonId/create" component={PhaseCreate}/>
     <Route path="/settingSeason/:elementId/settingPhase/:seasonId/update" component={PhasesUpdate}/>
+    <Route path="/settingStandard" component={StandardIndex}/>
+    <Route path="/settingStandard/create" component={StandardCreate}/>
+    <Route path="/settingStandard/update" component={StandardUpdate}/>
+    <Route path="/settingPesticide" component={PesticideIndex}/>
+    <Route path="/settingPesticide/create" component={PesticideCreate}/>
+    <Route path="/settingPesticide/update" component={PesticideUpdate}/>
+    <Route path="/settingFertilizer" component={FertilizerIndex}/>
+    <Route path="/settingFertilizer/create" component={FertilizerCreate}/>
+    <Route path="/settingFertilizer/update" component={FertilizerUpdate}/>
+
   </Route>
 );
 

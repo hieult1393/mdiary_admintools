@@ -33,6 +33,21 @@ export class Sidebar extends React.Component {
                 <span className="title">Setting Elements</span>
                 <span className="arrow"/>
               </Link>
+              <Link to="/settingStandard" className="nav-link nav-toggle">
+                <i className="fa fa-certificate"/>
+                <span className="title">Setting Standards</span>
+                <span className="arrow"/>
+              </Link>
+              <Link to="/settingPesticide" className="nav-link nav-toggle">
+                <i className="fa fa-warning"/>
+                <span className="title">Setting Pesticides</span>
+                <span className="arrow"/>
+              </Link>
+              <Link to="/settingFertilizer" className="nav-link nav-toggle">
+                <i className="fa fa-balance-scale"/>
+                <span className="title">Setting Fertilizers</span>
+                <span className="arrow"/>
+              </Link>
             </li>
           </ul>
         </div>

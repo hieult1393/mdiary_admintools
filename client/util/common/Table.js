@@ -45,7 +45,7 @@ export class TableColumn extends React.Component {
   render() {
     const { value } = this.props;
     return (
-      <td onClick={this.props.onClick}>{value}</td>
+      <td style={this.props.style} onClick={this.props.onClick}>{value}</td>
     );
   }
 }

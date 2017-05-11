@@ -22,11 +22,11 @@ const requiredForSelect = value => isEmpty(value) ? 'Vui lòng không để tr�
 const minValue = min => value => value && value <= min ? `Giá trị cần nhập phải lớn hơn 0!` : undefined;
 const maxLength = max => value => value && value.length > max ? `Vui lòng nhập dưới ${max} kí tự!` : undefined;
 const optionDefault = () => (<option value='' disabled>Select your option</option>);
-const titleName = 'Setting elements';
 const typeNameList = [{ id: 1, name: 'Dài ngày' }, { id: 2, name: 'Ngắn ngày' }];
 
 const ElementCreate = (props) => {
   const { handleSubmit, createElement } = props;
+  const titleName = 'Setting elements';
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}/>
