@@ -35,7 +35,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case CREATE_BUYER_FAILURE:
       return { ...state, createUserSuccess: false };
-    
+
     case UPDATE_USER_SUCCESS: {
       const usersList = state.data;
       const index = findIndex(usersList, element => element.id === action.payload.id);
@@ -57,7 +57,7 @@ const UserReducer = (state = initialState, action) => {
     case GET_USER_TYPE :
       return { ...state, userType: action.payload };
     case INIT_DATA_FOR_UPDATE_USER_FORM:
-      return { ...state, initDataForUpdateUserForm: action.payload };
+      return { ...state, initDataForUpdateUserForm: get(action, 'payload', {}) };
     case '@ReduxToastr/toastr/CLEAN':
       return { ...state, createUserSuccess: null, updateUserSuccess: null, deleteUserSuccess: null };
     default:

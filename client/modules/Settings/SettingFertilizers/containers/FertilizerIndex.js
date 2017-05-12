@@ -31,7 +31,7 @@ const FertilizerIndex = (props) => {
     fertilizersList, setCurrentFertilizerId, currentFertilizerId, setDeleting,
     deleting, deleteFertilizer, initDataForUpdateFertilizerForm
   } = props;
-  const titleName = 'Fertilizers';
+  const titleName = ' Setting Fertilizers';
   const tableHeaderList = [
     'S.No', 'Name', 'Ingredients', 'Use For', 'Dosage', 'Usage', 'Unit', 'Option',
   ];
@@ -48,7 +48,7 @@ const FertilizerIndex = (props) => {
             <TableColumn value={fertilizer.name}/>
             <TableColumn value={fertilizer.ingredients}/>
             <TableColumn style={{ width: '240px' }} value={fertilizer.use_for}/>
-            <TableColumn value={fertilizer.dosage}/>
+            <TableColumn style={{ width: '130px' }} value={fertilizer.dosage}/>
             <TableColumn value={fertilizer.usage}/>
             <TableColumn value={fertilizer.unit}/>
             <TableColumn value={

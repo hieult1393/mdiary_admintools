@@ -15,10 +15,6 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { compose, withState, lifecycle } from 'recompose';
 
-const tableHeaderList = [
-  'S.No', 'Name', 'Type name', 'Description', 'Image', 'Option'
-];
-
 const showImage = (element) => {
   const imgUrlDefault = '/img/no-image.png';
   const imgUrl = `${config.assets_url}upload/images/${element.images}`;
@@ -45,7 +41,10 @@ const convertHtmlToString = (value) => (
 
 const ElementIndex = (props) => {
   const { elementsList, setCurrentElementId, currentElementId, setDeleting, deleting, deleteElement, initDataForUpdateElementForm } = props;
-  const titleName = 'Elements';
+  const titleName = 'Setting Elements';
+  const tableHeaderList = [
+    'S.No', 'Name', 'Type name', 'Description', 'Color', 'Image', 'Option'
+  ];
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
@@ -55,7 +54,7 @@ const ElementIndex = (props) => {
       <Table tableHeaderList={tableHeaderList}>
         {elementsList.map((element, index) => (
           <TableRow key={index}>
-            <TableColumn value={index + 1}/>
+            <TableColumn style={{ width: '50px' }} value={index + 1}/>
             <TableColumn
               value={element.name}
               onClick={() => {
@@ -64,9 +63,14 @@ const ElementIndex = (props) => {
                 if (parseInt(element.type_id) === 2)
                   browserHistory.push(`/settingSeason/${element.id}/settingPhase/${element.season_id}`);
               }}/>
-            <TableColumn value={element.type_name}/>
-            <TableColumn value={convertHtmlToString(element.description)}/>
-            <TableColumn value={showImage(element)}/>
+            <TableColumn style={{ width: '120px' }} value={element.type_name}/>
+            <TableColumn style={{ width: '240px' }} value={convertHtmlToString(element.description)}/>
+            <TableColumn
+              style={{ width: '150px' }}
+              value={
+                <div style={{ width: '90px', height: '90px', backgroundColor: element.color }}/>
+              }/>
+            <TableColumn style={{ width: '150px' }} value={showImage(element)}/>
             <TableColumn value={
               <div>
                 <UpdateButton onClick={() => {

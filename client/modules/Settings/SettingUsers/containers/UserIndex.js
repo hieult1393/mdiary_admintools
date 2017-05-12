@@ -2,6 +2,7 @@ import PageContent, { HeaderPageContent, AddButton } from '../../../../util/comm
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton, AccountButton } from '../../../../util/common/Table';
 import { Toast } from '../../../../util/common/Toast';
 import Confirm from '../../../../util/common/Confirm';
+import { formatDate } from '../../../../util/helper/dateTime';
 import {
   fetchUserData,
   getCurrentUserData,
@@ -10,7 +11,6 @@ import {
   initDataForUpdateBuyerForm,
   initDataForUpdateFarmerForm,
 } from '../UserAction';
-import { formatDate } from '../../../../util/helper/dateTime';
 import {
   usersListSelector,
   createUserSuccessSelector,
@@ -43,11 +43,11 @@ const showConfirm = (currentUser, deleteBuyer, deleteFarmer, setDeleting) => {
 };
 
 const UserIndex = (props) => {
-  let titleName = 'Setting users';
   const {
     usersList, getCurrentUserData, setCurrentUser, currentUser, setDeleting, deleting, deleteBuyer, deleteFarmer,
     initDataForUpdateBuyerForm, initDataForUpdateFarmerForm,
   } = props;
+  const titleName = 'Setting Users';
   const tableHeaderList = [
     'STT', 'Name', 'Type Name', 'Birthday', 'Phone', 'Address', 'Options',
   ];

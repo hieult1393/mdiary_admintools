@@ -14,10 +14,6 @@ import { connect }  from 'react-redux';
 import { browserHistory } from 'react-router';
 import { compose, withState, lifecycle } from 'recompose';
 
-const tableHeaderList = [
-  'S.No', 'Name', 'Order', 'Duration(day)', 'Description', 'Option'
-];
-
 const showConfirm = (seasonId, deleteSeason, setDeleting) => {
   return (
     <Confirm
@@ -34,10 +30,14 @@ const convertHtmlToString = (value) => (
 );
 
 const SeasonIndex = (props) => {
-  const { seasonsList, setCurrentSeasonId, currentSeasonId, setDeleting, deleting, deleteSeason, params } = props;
-  const { createSeasonSuccess, updateSeasonSuccess, deleteSeasonSuccess, initDataForUpdateSeasonForm } = props;
-  const titleName = 'Seasons';
-  Toast(createSeasonSuccess, updateSeasonSuccess, deleteSeasonSuccess);
+  const {
+    seasonsList, setCurrentSeasonId, currentSeasonId, setDeleting, deleting,
+    deleteSeason, params, initDataForUpdateSeasonForm
+  } = props;
+  const titleName = 'Setting Seasons';
+  const tableHeaderList = [
+    'S.No', 'Name', 'Order', 'Duration(day)', 'Description', 'Option'
+  ];
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
@@ -93,6 +93,10 @@ const EnhanceSeasonIndex = compose(
     componentDidMount(){
       const { fetchSeasonData, params } = this.props;
       fetchSeasonData(params.elementId);
+    },
+    componentWillReceiveProps(nextProps){
+      const { createSeasonSuccess, updateSeasonSuccess, deleteSeasonSuccess, } = nextProps;
+      Toast(createSeasonSuccess, updateSeasonSuccess, deleteSeasonSuccess);
     }
   })
 )(SeasonIndex);

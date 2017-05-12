@@ -40,7 +40,7 @@ const AccountReducer = (state = initialState, action) => {
     case DELETE_ACCOUNT_FAILURE:
       return { ...state, deleteAccountSuccess: false };
     case INIT_DATA_FOR_UPDATE_ACCOUNT_FORM:
-      return { ...state, initDataForUpdateAccountForm: action.payload };
+      return { ...state, initDataForUpdateAccountForm: get(action, 'payload', {}) };
     case '@ReduxToastr/toastr/CLEAN':
       return { ...state, createAccountSuccess: null, updateAccountSuccess: null, deleteAccountSuccess: null };
     default:

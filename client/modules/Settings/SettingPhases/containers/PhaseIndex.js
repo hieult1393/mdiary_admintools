@@ -14,10 +14,6 @@ import { connect }  from 'react-redux';
 import { browserHistory } from 'react-router';
 import { compose, withState, lifecycle } from 'recompose';
 
-const tableHeaderList = [
-  'S.No', 'Name', 'Order', 'Duration(day)', 'KC', 'Root height', 'Option'
-];
-
 const showConfirm = (phaseId, deletePhase, setDeleting) => {
   return (
     <Confirm
@@ -30,10 +26,14 @@ const showConfirm = (phaseId, deletePhase, setDeleting) => {
 };
 
 const PhaseIndex = (props) => {
-  const { phasesList, setCurrentPhaseId, currentPhaseId, setDeleting, deleting, deletePhase, params } = props;
-  const { createPhaseSuccess, updatePhaseSuccess, deletePhaseSuccess, initDataForUpdatePhaseForm } = props;
-  const titleName = 'Phases';
-  Toast(createPhaseSuccess, updatePhaseSuccess, deletePhaseSuccess);
+  const {
+    phasesList, setCurrentPhaseId, currentPhaseId, setDeleting, deleting,
+    deletePhase, params, initDataForUpdatePhaseForm
+  } = props;
+  const titleName = 'Setting Phases';
+  const tableHeaderList = [
+    'S.No', 'Name', 'Order', 'Duration(day)', 'KC', 'Root height', 'Option'
+  ];
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}>
@@ -89,6 +89,10 @@ const EnhancePhaseIndex = compose(
     componentDidMount(){
       const { fetchPhaseData, params } = this.props;
       fetchPhaseData(params.seasonId);
+    },
+    componentWillReceiveProps(nextProps){
+      const { createPhaseSuccess, updatePhaseSuccess, deletePhaseSuccess, } = nextProps;
+      Toast(createPhaseSuccess, updatePhaseSuccess, deletePhaseSuccess);
     }
   })
 )(PhaseIndex);

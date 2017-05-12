@@ -1,22 +1,20 @@
 import PageContent, { HeaderPageContent } from '../../../../util/common/PageContent';
-import { Form, FormRow, FormColumn, CancelButton, SaveButton, Input, FieldInput } from '../../../../util/common/Form';
 import { getUserType, createBuyer, createFarmer } from '../UserAction';
 import { userTypeSelector } from '../UserReducer';
 import React from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
-import { compose, withState } from 'recompose';
+import { compose, withState, lifecycle } from 'recompose';
 import { reduxForm } from 'redux-form';
-import { BuyerForm } from '../components/BuyerCreateForm';
-import { FarmerForm } from '../components/FarmerCreateForm';
+import { BuyerCreateForm } from '../components/BuyerCreateForm';
+import { FarmerCreateForm } from '../components/FarmerCreateForm';
 import { UserTypeSelect } from '../components/UserTypeSelect';
 const typeNameList = [{ id: 1, name: 'Buyer' }, { id: 2, name: 'Farmer' }];
 
 const showForm = (userType, props) => {
   if (userType == 1)
-    return BuyerForm(props);
+    return BuyerCreateForm(props);
   else if (userType == 2)
-    return FarmerForm(props);
+    return FarmerCreateForm(props);
   return null
 };
 
@@ -43,8 +41,15 @@ const EnhanceUserCreate = compose(
       createFarmer,
     })
   ),
+  withState('errorDatePicker', 'setErrorDatePicker', null),
   reduxForm({
     form: 'userCreate',
+  }),
+  lifecycle({
+    componentDidMount(){
+      const { getUserType } = this.props;
+      getUserType('undefined');
+    }
   })
 )(UserCreate);
 

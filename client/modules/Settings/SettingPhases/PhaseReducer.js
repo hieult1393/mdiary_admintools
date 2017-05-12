@@ -40,7 +40,7 @@ const PhaseReducer = (state = initialState, action) => {
     case DELETE_PHASE_FAILURE:
       return { ...state, deleteSuccess: false };
     case INIT_DATA_FOR_UPDATE_PHASE_FORM:
-      return { ...state, initDataForUpdatePhaseForm: action.payload };
+      return { ...state, initDataForUpdatePhaseForm: get(action, 'payload', {}) };
     case '@ReduxToastr/toastr/CLEAN':
       return { ...state, createPhaseSuccess: null, updatePhaseSuccess: null, deletePhaseSuccess: null };
     default:

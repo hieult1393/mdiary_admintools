@@ -25,13 +25,12 @@ const showConfirm = (pesticideId, deletePesticide, setDeleting) => {
   );
 };
 
-
 const PesticideIndex = (props) => {
   const {
     pesticidesList, setCurrentPesticideId, currentPesticideId, setDeleting,
     deleting, deletePesticide, initDataForUpdatePesticideForm
   } = props;
-  const titleName = 'Pesticides';
+  const titleName = 'Setting Pesticides';
   const tableHeaderList = [
     'S.No', 'Name', 'Active Substance', 'Use For', 'Dosage', 'Count', 'Unit', 'Isolation', 'Option',
   ];

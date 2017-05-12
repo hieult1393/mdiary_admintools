@@ -40,7 +40,7 @@ const SeasonReducer = (state = initialState, action) => {
     case DELETE_SEASON_FAILURE:
       return { ...state, deleteSuccess: false };
     case INIT_DATA_FOR_UPDATE_SEASON_FORM:
-      return { ...state, initDataForUpdateSeasonForm: action.payload };
+      return { ...state, initDataForUpdateSeasonForm: get(action, 'payload', {}) };
     case '@ReduxToastr/toastr/CLEAN':
       return { ...state, createSeasonSuccess: null, updateSeasonSuccess: null, deleteSeasonSuccess: null };
     default:

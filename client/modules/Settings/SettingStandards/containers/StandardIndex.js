@@ -31,7 +31,7 @@ const StandardIndex = (props) => {
     standardsList, setCurrentStandardId, currentStandardId, setDeleting,
     deleting, deleteStandard, initDataForUpdateStandardForm
   } = props;
-  const titleName = 'Standards';
+  const titleName = 'Setting Standards';
   const tableHeaderList = [
     'S.No', 'Name', 'Description', 'Option',
   ];

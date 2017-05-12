@@ -15,8 +15,10 @@ export default class EnhanceDatePicker extends React.Component {
     const { change, setErrorDatePicker } = this.props;
     this.setState({ dateValue: getDateTimeValue(e) });
     change(fieldName, getDateTimeValue(e));
-    if (moment() - moment(getDateTimeValue(e)) < 18)
-      setErrorDatePicker('Vui lòng kiểm tra lại năm sinh!');
+    //567648000000 là con số 18 tuổi được tính bằng: 24*60*60*365*18*1000
+    if (moment() - moment(getDateTimeValue(e)) < 567648000000)//đơn vị của phép tính là millisecond
+      setErrorDatePicker('Năm sinh phải lớn hơn hoặc bằng 18 tuổi!');
+    else setErrorDatePicker(null);
   }
 
   render() {
