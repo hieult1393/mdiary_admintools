@@ -7,11 +7,7 @@ import UserCreate from './modules/Settings/SettingUsers/containers/UserCreate';
 import UserUpdate from './modules/Settings/SettingUsers/containers/UserUpdate';
 import AccountIndex from './modules/Settings/SettingAccounts/containers/AccountIndex';
 import AccountCreate from './modules/Settings/SettingAccounts/containers/AccountCreate';
-<<<<<<< Updated upstream
 import AccountUpdate from './modules/Settings/SettingAccounts/containers/AccountUpdate';
-=======
-import UserUpdate from './modules/Settings/SettingUsers/containers/UserUpdate';
->>>>>>> Stashed changes
 import ElementIndex from './modules/Settings/SettingElements/containers/ElementIndex';
 import ElementCreate from './modules/Settings/SettingElements/containers/ElementCreate';
 import ElementUpdate from './modules/Settings/SettingElements/containers/ElementUpdate';
@@ -45,11 +41,7 @@ export default (
     <Route path="/settingUser/update" component={UserUpdate}/>
     <Route path="/settingAccount" component={AccountIndex}/>
     <Route path="/settingAccount/create" component={AccountCreate}/>
-<<<<<<< Updated upstream
     <Route path="/settingAccount/update" component={AccountUpdate}/>
-=======
-    <Route path="/settingUser/update" component={UserUpdate}/>
->>>>>>> Stashed changes
     <Route path="/settingElement" component={ElementIndex}/>
     <Route path="/settingElement/create" component={ElementCreate}/>
     <Route path="/settingElement/update" component={ElementUpdate}/>
