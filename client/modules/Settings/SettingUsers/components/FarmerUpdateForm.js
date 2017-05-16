@@ -19,7 +19,7 @@ import { isEmpty } from 'lodash';
 const requiredForInput = value => value ? undefined : 'Please do not leave it blank!';
 const requiredForSelect = value => isEmpty(value) ? 'Please do not leave it blank!' : undefined;
 const maxLength = max => value => value && value.length > max ? `Please enter below${max}characters!` : undefined;
-const optionDefault = () => (<option value='' disabled>Select your option</option>);
+const optionDefault = () => (<option value='' disabled selected>Select your option</option>);
 const gendersList = [{ id: 'Male', name: 'male' }, { id: 'Female', name: 'female' }];
 
 export const FarmerUpdateForm = (props) => {

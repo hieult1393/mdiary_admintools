@@ -23,16 +23,16 @@ const PhaseCreate = (props) => {
       <Form onSubmit={handleSubmit(values => {
         values.season_id = params.seasonId;
         values.element_id = params.elementId;
+        values.duration = null;
+        values.kc = null;
+        values.root_height = null;
         values.order = isEmpty(phasesList) ? 1 : phasesList.length + 1;
         createPhase(values);
         browserHistory.goBack();
       })}>
         <FormRow>
           <FormColumn style={{ marginLeft: '5%' }}>
-            {FieldInput('Phase Name *', 'name', Input, [requiredForInput, maxLength(20)], 'text', 'Input phase name')}
-            {FieldInput('Duration(day) *', 'duration', Input, [requiredForInput, minValue(0)], 'number', 'Input phase duration')}
-            {FieldInput('KC *', 'kc', Input, [requiredForInput, minValue(0)], 'number', 'Input phase kc')}
-            {FieldInput('Root height *', 'root_height', Input, [requiredForInput, minValue(0)], 'number', 'Input phase root height')}
+            {FieldInput('Phase Name *', 'name', Input, requiredForInput, 'text', 'Input phase name')}
           </FormColumn>
         </FormRow>
         <FormRow>

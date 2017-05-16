@@ -1,9 +1,9 @@
-import React from 'react';
-import { Field } from 'redux-form';
 import UploadImage from './UploadImage';
 import Editor from './Editor';
 import Color from './Color';
 import EnhanceDatePicker from './EnhanceDatePicker';
+import React from 'react';
+import { Field } from 'redux-form';
 
 export const Input = ({ input, placeholder, label, type, meta: { touched, error } }) => (
   <div className={`form-group ${touched && error ? 'has-error' : ''}`}>

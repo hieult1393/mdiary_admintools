@@ -27,8 +27,7 @@ const SeasonUpdate = (props) => {
       })}>
         <FormRow>
           <FormColumn style={{ marginLeft: '5%' }}>
-            {FieldInput('Season Name *', 'name', Input, [requiredForInput, maxLength(20)], 'text', 'Input season name')}
-            {FieldInput('Duration(day) *', 'duration', Input, [requiredForInput, minValue(0)], 'number', 'Input season duration')}
+            {FieldInput('Season Name *', 'name', Input, requiredForInput, 'text', 'Input season name')}
           </FormColumn>
         </FormRow>
         <FormRow className="row">

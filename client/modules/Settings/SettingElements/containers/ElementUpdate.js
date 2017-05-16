@@ -14,10 +14,11 @@ import { initDataForUpdateElementFormSelector } from '../ElementReducer';
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { isEmpty, find } from 'lodash';
 import { compose, withState } from 'recompose';
 
+const formSelector = formValueSelector('elementUpdate');
 const requiredForInput = value => value ? undefined : 'Vui lòng không để trống!';
 const minValue = min => value => value && value <= min ? `Giá trị cần nhập phải lớn hơn 0!` : undefined;
 const maxLength = max => value => value && value.length > max ? `Vui lòng nhập dưới ${max} kí tự!` : undefined;
@@ -25,22 +26,24 @@ const titleName = 'Setting elements';
 const typeNameList = [{ id: 1, name: 'Dài ngày' }, { id: 2, name: 'Ngắn ngày' }];
 
 const ElementUpdate = (props) => {
-  const { handleSubmit, updateElement, initData } = props;
+  const { handleSubmit, updateElement, initData, typeID } = props;
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}/>
       <Form onSubmit={handleSubmit(values => {
         values.type_name = find(typeNameList, { id: parseInt(values.type_id) }).name;
+        values.year_begin_harvest = parseInt(values.type_id) === 1 ? values.year_begin_harvest : null;
         values.images = values.images ? values.images : null;
         values.description = values.description ? values.description : null;
+        delete values.season_id;
         updateElement(values.id, values);
         browserHistory.goBack();
       })}>
         <FormRow>
           <FormColumn style={{ marginLeft: '5%' }}>
-            {FieldInput('Element Name *', 'name', Input, [requiredForInput, maxLength(20)], 'text', 'Input element name')}
-            {FieldInput('Year begin harvest *', 'year_begin_harvest', Input, [requiredForInput, minValue(0)], 'number', 'Input year begin harvest')}
+            {FieldInput('Element Name *', 'name', Input, requiredForInput, 'text', 'Input element name')}
             {FieldSelect('Type name *', 'type_id', Select, typeNameList)}
+            {parseInt(typeID) === 1 ? FieldInput('Year begin harvest *', 'year_begin_harvest', Input, [requiredForInput, minValue(0)], 'number', 'Input year begin harvest') : null}
             {FieldColor('Color *', 'color', requiredForInput, props, initData.color)}
           </FormColumn>
           <FormColumn>
@@ -67,6 +70,7 @@ const EnhanceElementUpdate = compose(
     state => ({
       initData: initDataForUpdateElementFormSelector(state),
       initialValues: initDataForUpdateElementFormSelector(state),
+      typeID: formSelector(state, 'type_id'),
     }),
     ({
       updateElement,

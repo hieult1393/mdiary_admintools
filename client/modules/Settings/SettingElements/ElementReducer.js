@@ -14,11 +14,11 @@ const initialState = { data: [] };
 const ElementReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ELEMENT_DATA_SUCCESS:
-      return { ...state, data: orderBy(get(action, 'payload', []), ['id'], ['desc']) };
+      return { ...state, data: orderBy(get(action, 'payload', []), ['id'], ['asc']) };
     case CREATE_ELEMENT_SUCCESS:
       return {
         ...state,
-        data: orderBy(compact([...state.data, action.payload]), ['id'], ['desc']),
+        data: orderBy(compact([...state.data, action.payload.element]), ['id'], ['asc']),
         createElementSuccess: true,
       };
     case CREATE_ELEMENT_FAILURE:
@@ -27,7 +27,7 @@ const ElementReducer = (state = initialState, action) => {
       const elementsList = state.data;
       const index = findIndex(elementsList, element => element.id === action.payload.id);
       elementsList.splice(index, 1, action.payload);
-      return { ...state, data: orderBy(elementsList, ['id'], ['desc']), updateElementSuccess: true };
+      return { ...state, data: orderBy(elementsList, ['id'], ['asc']), updateElementSuccess: true };
     }
     case UPDATE_ELEMENT_FAILURE:
       return { ...state, updateElementSuccess: false };

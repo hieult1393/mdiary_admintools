@@ -8,6 +8,9 @@ import UserUpdate from './modules/Settings/SettingUsers/containers/UserUpdate';
 import AccountIndex from './modules/Settings/SettingAccounts/containers/AccountIndex';
 import AccountCreate from './modules/Settings/SettingAccounts/containers/AccountCreate';
 import AccountUpdate from './modules/Settings/SettingAccounts/containers/AccountUpdate';
+import ConnectionIndex from './modules/Settings/SettingConnections/containers/ConnectionIndex';
+import ConnectionCreate from './modules/Settings/SettingConnections/containers/ConnectionCreate';
+import ConnectionUpdate from './modules/Settings/SettingConnections/containers/ConnectionUpdate';
 import ElementIndex from './modules/Settings/SettingElements/containers/ElementIndex';
 import ElementCreate from './modules/Settings/SettingElements/containers/ElementCreate';
 import ElementUpdate from './modules/Settings/SettingElements/containers/ElementUpdate';
@@ -42,6 +45,9 @@ export default (
     <Route path="/settingAccount" component={AccountIndex}/>
     <Route path="/settingAccount/create" component={AccountCreate}/>
     <Route path="/settingAccount/update" component={AccountUpdate}/>
+    <Route path="/settingConnection" component={ConnectionIndex}/>
+    <Route path="/settingConnection/create" component={ConnectionCreate}/>
+    <Route path="/settingConnection/update" component={ConnectionUpdate}/>
     <Route path="/settingElement" component={ElementIndex}/>
     <Route path="/settingElement/create" component={ElementCreate}/>
     <Route path="/settingElement/update" component={ElementUpdate}/>

@@ -9,18 +9,14 @@ import {
   INIT_DATA_FOR_UPDATE_CONNECTION_FORM,
 } from './ConnectionAction';
 import { get, orderBy, compact, findIndex } from 'lodash';
+
 const initialState = { data: [] };
-const connectionReducer = (state = initialState, action) => {
+const ConnectionReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_CONNECTION_DATA_SUCCESS:
-      return {
-        ...state, data: orderBy(get(action, 'payload', []), ['id'], ['desc'])
-      };
+      return { ...state, data: orderBy(get(action, 'payload', []), ['id'], ['desc']) };
     case CREATE_CONNECTION_SUCCESS:
-      return {
-        ...state, data: orderBy(compact(...state.data, action.payload), ['id'], ['desc']),
-        createConnectionSuccess: true,
-      };
+      return { ...state, data: orderBy(compact(...state.data, action.payload), ['id'], ['desc']), createConnectionSuccess: true };
     case CREATE_CONNECTION_FAILURE:
       return { ...state, createConnectionSuccess: false };
     case UPDATE_CONNECTION_SUCCESS: {
@@ -45,12 +41,12 @@ const connectionReducer = (state = initialState, action) => {
       return { ...state, createConnectionSuccess: null, updateConnectionSuccess: null, deleteConnectionSuccess: null };
     default:
       return state;
-    
+
   }
 };
-export const connectionsListSelector=state=>state.connectionReducer.data;
-export const createConnectionSuccessSelector=state=> state.connectionReducer.createConnectionSuccess;
-export const updateConnectionSuccessSelector=state=> state.connectionReducer.updateConnectionSuccess;
-export const deleteConnectionSuccessSelector=state=> state.connectionReducer.deleteConnectionSuccess;
-export const initDataForUpdateConnectionFormSelector=state=> state.connectionReducer.initDataForUpdateConnectionFormSuccess;
-export default connectionReducer;
+export const connectionsListSelector = state => state.ConnectionReducer.data;
+export const createConnectionSuccessSelector = state => state.ConnectionReducer.createConnectionSuccess;
+export const updateConnectionSuccessSelector = state => state.ConnectionReducer.updateConnectionSuccess;
+export const deleteConnectionSuccessSelector = state => state.ConnectionReducer.deleteConnectionSuccess;
+export const initDataForUpdateConnectionFormSelector = state => state.ConnectionReducer.initDataForUpdateConnectionForm;
+export default ConnectionReducer;

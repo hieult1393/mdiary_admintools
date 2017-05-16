@@ -8,6 +8,7 @@ import LoginReducer from './modules/Login/LoginReducer';
 import AppReducer from './modules/App/AppReducer';
 import UserReducer from './modules/Settings/SettingUsers/UserReducer';
 import AccountReducer from './modules/Settings/SettingAccounts/AccountReducer';
+import ConnectionReducer from './modules/Settings/SettingConnections/ConnectionReducer';
 import ElementReducer from './modules/Settings/SettingElements/ElementReducer';
 import SeasonReducer from './modules/Settings/SettingSeasons/SeasonReducer';
 import PhaseReducer from './modules/Settings/SettingPhases/PhaseReducer';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   AppReducer,
   UserReducer,
   AccountReducer,
+  ConnectionReducer,
   ElementReducer,
   SeasonReducer,
   PhaseReducer,

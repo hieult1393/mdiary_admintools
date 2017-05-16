@@ -1,39 +1,38 @@
 import PageContent, { HeaderPageContent } from '../../../../util/common/PageContent';
 import { Form, FormRow, FormColumn, CancelButton, SaveButton } from '../../../../util/common/Form';
-import {
-  Select,
-  FieldSelect,
-  FieldDatePicker,
-} from '../../../../util/common/Form';
+import { Select, FieldSelect, FieldDatePicker } from '../../../../util/common/Form';
 import { createConnection } from '../ConnectionAction';
+import { fetchUserData } from '../../SettingUsers/UserAction';
+import { usersListSelector } from '../../SettingUsers/UserReducer';
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { isEmpty, find } from 'lodash';
-import { compose, withState } from 'recompose';
+import { compose, withState, lifecycle } from 'recompose';
 
 const requiredForSelect = value => isEmpty(value) ? 'Vui lòng không để trống!' : undefined;
-const optionDefault = () => (<option value='' disabled>Select your option</option>);
-const typeNameList = [{ id: 1, name: 'Dài ngày' }, { id: 2, name: 'Ngắn ngày' }];
+const optionDefault = () => (<option value='' disabled selected>Select your option</option>);
+const statusList = [{ id: 1, name: 'Connected' }, { id: 2, name: 'Not Connect' }];
 
 const ConnectionCreate = (props) => {
-  const { handleSubmit, createConnection } = props;
+  const { handleSubmit, createConnection, usersList } = props;
   const titleName = 'Setting Connections';
+  const buyersList = usersList.filter(user => user.type_id === 1);
+  const farmersList = usersList.filter(user => user.type_id === 2);
   return (
     <PageContent>
       <HeaderPageContent titlePageContent={titleName}/>
       <Form onSubmit={handleSubmit(values => {
-        values.type_name = find(typeNameList, { id: parseInt(values.type_id) }).name;
         createConnection(values);
         browserHistory.goBack();
       })}>
         <FormRow>
           <FormColumn style={{ marginLeft: '5%' }}>
-            {FieldSelect('Buyer', 'buyer_id', Select, typeNameList, requiredForSelect, optionDefault())}
-            {FieldSelect('Farmer *', 'farmer_id', Select, typeNameList, requiredForSelect, optionDefault())}
-            {FieldDatePicker('BirthDay *', 'birthday', props, getDateTimeValue(initData.birthday))}
-            {FieldSelect('Status *', 'status', Select, typeNameList, requiredForSelect, optionDefault())}
+            {FieldSelect('Buyer *', 'buyer_id', Select, buyersList, requiredForSelect, optionDefault())}
+            {FieldSelect('Farmer *', 'farmer_id', Select, farmersList, requiredForSelect, optionDefault())}
+            {FieldDatePicker('Date *', 'date', props)}
+            {FieldSelect('Status *', 'status', Select, statusList, requiredForSelect, optionDefault())}
           </FormColumn>
         </FormRow>
         <FormRow>
@@ -50,16 +49,24 @@ const ConnectionCreate = (props) => {
 
 const EnhanceConnectionCreate = compose(
   connect(
-    state => ({}),
+    state => ({
+      usersList: usersListSelector(state),
+    }),
     ({
       createConnection,
+      fetchUserData,
     })
   ),
-  withState('showColor', 'setShowColor', false),
   withState('errorDatePicker', 'setErrorDatePicker', null),
   reduxForm({
     form: 'connectionCreate',
   }),
+  lifecycle({
+    componentDidMount(){
+      const { fetchUserData } = this.props;
+      fetchUserData();
+    },
+  })
 )
 (ConnectionCreate);
 

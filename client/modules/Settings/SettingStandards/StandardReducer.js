@@ -14,11 +14,11 @@ const initialState = { data: [] };
 const StandardReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_STANDARD_DATA_SUCCESS:
-      return { ...state, data: orderBy(get(action, 'payload', []), ['id'], ['desc']) };
+      return { ...state, data: orderBy(get(action, 'payload', []), ['id'], ['asc']) };
     case CREATE_STANDARD_SUCCESS:
       return {
         ...state,
-        data: orderBy(compact([...state.data, action.payload]), ['id'], ['desc']),
+        data: orderBy(compact([...state.data, action.payload]), ['id'], ['asc']),
         createStandardSuccess: true,
       };
     case CREATE_STANDARD_FAILURE:
@@ -27,7 +27,7 @@ const StandardReducer = (state = initialState, action) => {
       const standardsList = state.data;
       const index = findIndex(standardsList, element => element.id === action.payload.id);
       standardsList.splice(index, 1, action.payload);
-      return { ...state, data: orderBy(standardsList, ['id'], ['desc']), updateStandardSuccess: true };
+      return { ...state, data: orderBy(standardsList, ['id'], ['asc']), updateStandardSuccess: true };
     }
     case UPDATE_STANDARD_FAILURE:
       return { ...state, updateStandardSuccess: false };

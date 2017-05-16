@@ -1,54 +1,68 @@
-import React from 'react';
-import PageContent,{ HeaderPageContent, AddButton } from '../../../../util/common/PageContent';
+import PageContent, { HeaderPageContent, AddButton } from '../../../../util/common/PageContent';
 import { Table, TableRow, TableColumn, UpdateButton, DeleteButton } from '../../../../util/common/Table';
+import { Toast } from '../../../../util/common/Toast';
+import Confirm from '../../../../util/common/Confirm';
+import { formatDate } from '../../../../util/helper/dateTime';
+import {
+  fetchConnectionData,
+  deleteConnection,
+  initDataForUpdateConnectionForm
+} from '../ConnectionAction';
 import {
   connectionsListSelector,
   createConnectionSuccessSelector,
   updateConnectionSuccessSelector,
   deleteConnectionSuccessSelector,
 } from '../ConnectionReducer';
-import { Toast }from '../../../../util/common/Toast';
-import {
-  fetchConnectionData,
-  deleteConnection,
-  initDataForUpdateConnectionForm,
-} from '../ConnectionAction';
-import { compose } from 'recompose';
-const TableHeaderList = ['Farmer-ID', 'Buyer-ID', 'Date', 'Status',];
-const showConfirm = (connectionId, deleteConnection, setDeleting) => {
+import React from 'react';
+import { compose, withState, lifecycle } from 'recompose';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+
+const showConfirm = (currentConnectionId, deleteConnection, setDeleting) => {
   return (
     <Confirm
       onConfirm={() => {
-        deleteConnection(connectionId);
+        deleteConnection(currentConnectionId);
         setDeleting(false);
       }}
       onCancel={() => setDeleting(false)}/>
   );
 };
 
-const connectionIndex = (props) => {
+const ConnectionIndex = (props) => {
   const {
-    connectionsList, setCurrentConnectionId, currentConnectionId, setDeleting, deleting, deleteConnection,
-    initDataForUpdateConnectionForm
+    connectionsList, setCurrentConnectionId, currentConnectionId, setDeleting,
+    deleting, deleteConnection, initDataForUpdateConnectionForm,
   } = props;
   const titleName = 'Setting Connections';
+  const tableHeaderList = [
+    'STT', 'Farmer ID', 'Buyer ID', 'Date', 'Status', 'Options',
+  ];
   return (
     <PageContent>
-      <HeaderPageContent headerPageTitle={titleName}>
-        <AddButton style={{ marginRight: '5px' }}/>
+      <HeaderPageContent titlePageContent={titleName}>
+        <AddButton style={{ marginRight: '5px' }}
+                   onClick={() => browserHistory.push(`/settingConnection/create`)}/>
       </HeaderPageContent>
-      <Table TableHeaderList={TableHeaderList}>
+      <Table tableHeaderList={tableHeaderList}>
         {connectionsList.map((connection, index) => (
           <TableRow key={index}>
-            <TableColumn values={index + 1}/>
-            <TableColumn values={connection.farmer_id}/>
-            <TableColumn values={connection.buyer_id}/>
-            <TableColumn values={connection.date}/>
-            <TableColumn values={connection.status}/>
-            <TableColumn values={
+            <TableColumn value={index + 1}/>
+            <TableColumn value={connection.farmer_id}/>
+            <TableColumn value={connection.buyer_id}/>
+            <TableColumn value={formatDate(connection.date)}/>
+            <TableColumn value={connection.status}/>
+            <TableColumn value={
               <div>
-                <UpdateButton/>
-                <DeleteButton/>
+                <UpdateButton onClick={() => {
+                  initDataForUpdateConnectionForm(connection);
+                  browserHistory.push(`/settingConnection/update`);
+                }}/>
+                <DeleteButton onClick={() => {
+                  setCurrentConnectionId(connection.id);
+                  setDeleting(true);
+                }}/>
               </div>
             }/>
           </TableRow>
@@ -57,7 +71,6 @@ const connectionIndex = (props) => {
       {deleting ? showConfirm(currentConnectionId, deleteConnection, setDeleting) : null}
     </PageContent>
   )
-  
 };
 const EnhanceConnectionIndex = compose(
   connect(
@@ -85,5 +98,8 @@ const EnhanceConnectionIndex = compose(
       Toast(createConnectionSuccess, updateConnectionSuccess, deleteConnectionSuccess);
     }
   })
-)(connectionIndex);
+)(ConnectionIndex);
 export default EnhanceConnectionIndex;
+
+
+

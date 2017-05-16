@@ -24,8 +24,8 @@ const StandardUpdate = (props) => {
       })}>
         <FormRow>
           <FormColumn style={{ marginLeft: '5%' }}>
-            {FieldInput('Standard Name *', 'name', Input, [requiredForInput, maxLength(20)], 'text', 'Input standard name')}
-            {FieldInput('Description *', 'description', Input, requiredForInput, 'text', 'Input description')}
+            {FieldInput('Standard Name *', 'name', Input, requiredForInput, 'text', 'Input standard name')}
+            {FieldInput('Description *', 'description', Input, null, 'text', 'Input description')}
           </FormColumn>
         </FormRow>
         <FormRow>
